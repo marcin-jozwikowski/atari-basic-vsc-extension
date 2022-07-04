@@ -559,10 +559,6 @@
             }
           },
           "push": "cmd_let"
-        },
-        {
-          "match": "",
-          "set": "syntax_error"
         }
       ]
     },
@@ -575,10 +571,6 @@
         },
         {
           "include": "#real_expr"
-        },
-        {
-          "match": "",
-          "set": "syntax_error"
         }
       ]
     },
@@ -592,10 +584,6 @@
             }
           },
           "set": "expr_device"
-        },
-        {
-          "match": "",
-          "set": "syntax_error"
         }
       ]
     },
@@ -607,10 +595,6 @@
         {
           "match": "\\s*(:|$|(GOTO|GOSUB)\\b)",
           "set": "syntax_error"
-        },
-        {
-          "match": "",
-          "set": "cmd_on_expr"
         }
       ]
     },
@@ -682,10 +666,6 @@
       "patterns": [
         {
           "include": "#mixin_statement_end"
-        },
-        {
-          "match": "",
-          "set": "syntax_error"
         }
       ]
     },
@@ -698,10 +678,6 @@
           "match": "\\(",
           "name": "support.paren.open.subscript.ataribasic",
           "push": "expr_paren_open"
-        },
-        {
-          "match": "",
-          "set": "cmd_let_equals"
         }
       ]
     },
@@ -714,10 +690,6 @@
           "match": "=",
           "name": "keyword.operator.assignment.ataribasic",
           "set": "one_expr"
-        },
-        {
-          "match": "",
-          "set": "syntax_error"
         }
       ]
     },
@@ -946,10 +918,6 @@
           "match": "\\(",
           "name": "support.paren.open.func.ataribasic",
           "set": "expr_paren_open"
-        },
-        {
-          "match": "",
-          "set": "syntax_error"
         }
       ]
     },
@@ -1171,10 +1139,6 @@
       "patterns": [
         {
           "match": ":"
-        },
-        {
-          "match": "",
-          "set": "syntax_error"
         }
       ]
     },
@@ -1184,10 +1148,6 @@
           "match": ":",
           "name": "support.token.delimiter.statement.ataribasic",
           "set": "dead_code"
-        },
-        {
-          "match": "",
-          "set": "syntax_error"
         }
       ]
     },
@@ -1201,10 +1161,6 @@
           "match": "REM|(RE?)?\\.",
           "name": "keyword.rem.ataribasic marked.dead",
           "set": "cmd_rem"
-        },
-        {
-          "match": "",
-          "set": "marked_dead"
         }
       ]
     },
@@ -1253,10 +1209,6 @@
             }
           },
           "set": "expr_2nd_modifier"
-        },
-        {
-          "match": "",
-          "set": "expr_wants_value"
         }
       ]
     },
@@ -1273,10 +1225,6 @@
         {
           "match": "NOT|[-+]",
           "set": "syntax_error"
-        },
-        {
-          "match": "",
-          "set": "expr_wants_value"
         }
       ]
     },
@@ -1405,10 +1353,6 @@
           "match": "[A-Z][A-Z0-9]*",
           "name": "variable.float.ataribasic",
           "set": "expr_eat_subscript"
-        },
-        {
-          "match": "",
-          "set": "syntax_error"
         }
       ]
     },
@@ -1532,10 +1476,6 @@
             }
           },
           "set": "expr_till_close"
-        },
-        {
-          "match": "",
-          "set": "expr_wants_operator"
         }
       ]
     },
@@ -1555,10 +1495,6 @@
             }
           },
           "set": "expr_wants_operator"
-        },
-        {
-          "match": "",
-          "set": "syntax_error"
         }
       ]
     },
@@ -1607,10 +1543,6 @@
           "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
           "name": "constant.numeric.float.ataribasic",
           "set": "expr_wants_operator"
-        },
-        {
-          "match": "",
-          "set": "syntax_error"
         }
       ]
     },
@@ -1623,10 +1555,6 @@
         },
         {
           "include": "#mixin_string"
-        },
-        {
-          "match": "",
-          "set": "syntax_error"
         }
       ]
     },
@@ -1685,10 +1613,6 @@
         {
           "match": "\\s*([,;:]|$)",
           "set": "syntax_error"
-        },
-        {
-          "match": "",
-          "set": "real_expr"
         }
       ]
     },
