@@ -32,7 +32,7 @@
             {
                 "language": "basic",
                 "scopeName": "source.basic",
-                "path": "./syntaxes/basic.tmLanguage.json"
+                "path": "./syntaxes/AtariBASIC.tmLanguage_3.json"
             }
         ]
     }
