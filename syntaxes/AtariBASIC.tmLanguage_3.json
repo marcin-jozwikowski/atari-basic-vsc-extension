@@ -221,7 +221,7 @@
           "push": "syntax_error"
         },
         {
-          "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
+          "match": "^(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
           "name": "constant.numeric.line-number.ataribasic",
           "push": "code_line"
         },
@@ -241,7 +241,7 @@
           "meta_content_scope": "ctx.code_line.ataribasic"
         },
         {
-          "match": "((REM|(RE?)?\\.)([ \\w]*))",
+          "match": "((REM|(RE?)?\\.)([\\s\\S]*))",
           "name": "keyword.rem.ataribasic",
           "captures": {
             "2": {
@@ -548,25 +548,33 @@
           "push": "cmd_if"
         },
         {
-          "match": "(LET)?\\s*([A-Z][A-Z0-9]*\\$)",
+          "match": "THEN",
+          "name": "keyword.then.ataribasic",
+          "push": "cmd_then"
+        },
+        {
+          "match": "(LET)\\s*([A-Z][A-Z0-9]*\\$)",
           "captures": {
             "1": {
               "name": "keyword.let.ataribasic"
             },
             "2": {
-              "name": "variable.string.ataribasic"
+              "name": "variable.string.let.ataribasic"
             }
           },
           "push": "cmd_let"
         },
         {
-          "match": "(LET)?\\s*([A-Z][A-Z0-9]*)",
+          "match": "(VAR)\\s*([A-Z][A-Z0-9]*)",
           "captures": {
             "1": {
-              "name": "keyword.let.ataribasic"
+              "name": "keyword.var.ataribasic"
+            },
+            "2": {
+              "name": "variable.string.var.ataribasic"
             }
           },
-          "push": "cmd_let"
+          "push": "cmd_var"
         }
       ]
     },
@@ -585,7 +593,7 @@
     "cmd_xio_part2": {
       "patterns": [
         {
-          "match": "\\s*(\\#)",
+          "match": "\\s*(\\#[0-9{1,2}])",
           "captures": {
             "1": {
               "name": "support.token.iocb.ataribasic"
@@ -602,7 +610,7 @@
         },
         {
           "match": "\\s*(:|$|(GOTO|GOSUB)\\b)",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         }
       ]
     },
@@ -641,7 +649,7 @@
         },
         {
           "match": "[^\\d]",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         }
       ]
     },
@@ -713,7 +721,7 @@
         },
         {
           "match": "\\s*:|$",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "include": "#real_expr"
@@ -777,7 +785,7 @@
         },
         {
           "match": "[A-Z][A-Z0-9]*\\$",
-          "name": "variable.string.ataribasic",
+          "name": "variable.string.dim.ataribasic",
           "push": "cmd_dim_subscript"
         },
         {
@@ -803,7 +811,7 @@
       "patterns": [
         {
           "match": "[A-Z][A-Z0-9]*\\$",
-          "name": "variable.string.ataribasic",
+          "name": "variable.string.varname.ataribasic",
           "push": "var_eat_subscript"
         },
         {
@@ -832,7 +840,7 @@
       "patterns": [
         {
           "match": "[a-z\\$\\%]",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "match": "CHR\\$",
@@ -946,7 +954,7 @@
         },
         {
           "match": "(<>|[<>]=?|=|AND|NOT|OR)",
-          "name": "keyword.operator.logic.ataribasic"
+          "name": "keyword.operator.logic.mixin.operators.ataribasic"
         }
       ]
     },
@@ -971,7 +979,7 @@
         },
         {
           "match": "\\)",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "include": "#mixin_operators"
@@ -1025,7 +1033,7 @@
         },
         {
           "match": "[^)]*(;:|$)",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         }
       ]
     },
@@ -1062,7 +1070,7 @@
         },
         {
           "match": "\\)",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "include": "#mixin_string"
@@ -1107,7 +1115,7 @@
         },
         {
           "match": "[^\"]*$",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "match": "\\\"",
@@ -1212,7 +1220,7 @@
           "match": "(NOT)|(-)|(\\+)",
           "captures": {
             "1": {
-              "name": "keyword.operator.logic.ataribasic"
+              "name": "keyword.operator.logic.expr.modifiers.ataribasic"
             },
             "2": {
               "name": "keyword.operator.negative.ataribasic"
@@ -1237,7 +1245,7 @@
         },
         {
           "match": "NOT|[-+]",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         }
       ]
     },
@@ -1354,12 +1362,11 @@
         },
         {
           "match": "THEN|GOTO|GOSUB",
-          "name": "invalid.error.reserved-word.ataribasic",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "match": "[A-Z][A-Z0-9]*\\$",
-          "name": "variable.string.ataribasic",
+          "name": "variable.string.expr_wants.ataribasic",
           "set": "expr_eat_subscript"
         },
         {
@@ -1376,7 +1383,7 @@
         },
         {
           "match": "((<>|[<>]=|[-+*/^<=>]|AND|OR)\\s*(:|$))",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "match": "[-+*/^]",
@@ -1385,7 +1392,7 @@
         },
         {
           "match": "<>|[<>]=?|=|AND|OR",
-          "name": "keyword.operator.logic.ataribasic",
+          "name": "keyword.operator.logic.expr.wants.operator.ataribasic",
           "set": "expr_eat_modifier"
         },
         {
@@ -1418,7 +1425,7 @@
         },
         {
           "match": "([A-Z][A-Z0-9]*)|([-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?))|\\(",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "match": ""
@@ -1432,7 +1439,7 @@
         },
         {
           "match": "(<>|[<>]=?|=)\\s*(:|$)",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "match": "<>|[<>]=?|=",
@@ -1469,7 +1476,7 @@
         },
         {
           "match": "([A-Z][A-Z0-9]*)|([-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?))|\\(",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "match": ""
@@ -1518,7 +1525,7 @@
         },
         {
           "match": "[^)]*(;:|$)",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "include": "#mixin_statement_end"
@@ -1545,7 +1552,7 @@
         },
         {
           "match": "[A-Z][A-Z0-9]*\\$",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "match": "[A-Z][A-Z0-9]*",
@@ -1563,7 +1570,7 @@
       "patterns": [
         {
           "match": "[A-Z][A-Z0-9]*\\$",
-          "name": "variable.string.ataribasic",
+          "name": "variable.string.expr_wants_string.ataribasic",
           "set": "expr_wants_operator"
         },
         {
@@ -1597,7 +1604,7 @@
         },
         {
           "match": "(<>|[<>]=?|=|AND|NOT|OR)",
-          "name": "keyword.operator.logic.ataribasic"
+          "name": "keyword.operator.logic.mixin.some.ataribasic"
         },
         {
           "include": "#mixin_values"
@@ -1609,11 +1616,11 @@
         },
         {
           "match": "\\)",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "match": "[:$]",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "match": "([-+*/^])",
@@ -1625,7 +1632,7 @@
       "patterns": [
         {
           "match": "\\s*([,;:]|$)",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         }
       ]
     },
@@ -1636,7 +1643,7 @@
         },
         {
           "match": "\\s*:|$",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "match": "\\s*(,)",
@@ -1659,7 +1666,7 @@
         },
         {
           "match": "\\s*:|$",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "match": "\\s*(,)",
@@ -1682,7 +1689,7 @@
         },
         {
           "match": "\\s*:|$",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "match": "\\s*(,)",
@@ -1702,7 +1709,7 @@
       "patterns": [
         {
           "match": ":\\s*$",
-          "set": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "match": ":|$",
