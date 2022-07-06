@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "Atari BASIC",
-  "scopeName": "source.basic",
+  "scopeName": "source.atari.basic",
   "information_for_contributors": [
     "This file is a modified version of https://github.com/thinkyhead/6502-Tools/blob/master/Sublime/AtariTools/AtariBASIC.sublime-syntax"
   ],
@@ -196,7 +196,7 @@
           "meta_include_prototype": false
         },
         {
-          "meta_content_scope": "ctx.main.ataribasic"
+          "meta_content_scope": "ctx.main.atari.basic"
         },
         {
           "match": "$"
@@ -205,10 +205,10 @@
           "match": "^(.{254})(\\S.+?)\\s*$",
           "captures": {
             "1": {
-              "name": "invalid.warning.line-too-long.ataribasic"
+              "name": "invalid.warning.line-too-long.atari.basic"
             },
             "2": {
-              "name": "invalid.error.line-too-long.ataribasic"
+              "name": "invalid.error.line-too-long.atari.basic"
             }
           }
         },
@@ -217,12 +217,12 @@
         },
         {
           "match": "([-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?))\\s*ERROR\\s*-.*",
-          "name": "invalid.error.line.ataribasic",
+          "name": "invalid.error.line.atari.basic",
           "push": "syntax_error"
         },
         {
           "match": "^(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
-          "name": "constant.numeric.line-number.ataribasic",
+          "name": "constant.numeric.line-number.atari.basic",
           "push": "code_line"
         },
         {
@@ -238,11 +238,11 @@
     "code_line": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.code_line.ataribasic"
+          "meta_content_scope": "ctx.code_line.atari.basic"
         },
         {
           "match": "((REM|(RE?)?\\.)([\\s\\S]*))",
-          "name": "keyword.rem.ataribasic",
+          "name": "keyword.rem.atari.basic",
           "captures": {
             "2": {
               "name": "comment.line"
@@ -256,39 +256,39 @@
           "match": "(D(ATA|(AT?)?\\.))\\s*",
           "captures": {
             "1": {
-              "name": "keyword.data.ataribasic"
+              "name": "keyword.data.atari.basic"
             }
           },
           "push": "cmd_data"
         },
         {
           "match": "RES(TORE|(T(O(RE?)?)?)?\\.)",
-          "name": "keyword.restore.ataribasic",
+          "name": "keyword.restore.atari.basic",
           "push": "expr_start"
         },
         {
           "match": "(CLR)|(CON[T.])|(DEG)|(POP)|(RAD)|(CLOAD)|(CS(AVE|(AV?)?\\.))",
           "captures": {
             "1": {
-              "name": "keyword.clr.ataribasic"
+              "name": "keyword.clr.atari.basic"
             },
             "2": {
-              "name": "keyword.cont.ataribasic"
+              "name": "keyword.cont.atari.basic"
             },
             "3": {
-              "name": "keyword.deg.ataribasic"
+              "name": "keyword.deg.atari.basic"
             },
             "4": {
-              "name": "keyword.pop.ataribasic"
+              "name": "keyword.pop.atari.basic"
             },
             "5": {
-              "name": "keyword.rad.ataribasic"
+              "name": "keyword.rad.atari.basic"
             },
             "6": {
-              "name": "keyword.cload.ataribasic"
+              "name": "keyword.cload.atari.basic"
             },
             "7": {
-              "name": "keyword.csave.ataribasic"
+              "name": "keyword.csave.atari.basic"
             }
           },
           "push": "cmd_done"
@@ -297,78 +297,78 @@
           "match": "(B(YE|Y?\\.))|(DOS)|(END)|(NEW)|(STO[P.])|(RET(URN|(UR?)?\\.))",
           "captures": {
             "1": {
-              "name": "keyword.bye.ataribasic"
+              "name": "keyword.bye.atari.basic"
             },
             "3": {
-              "name": "keyword.dos.ataribasic"
+              "name": "keyword.dos.atari.basic"
             },
             "4": {
-              "name": "keyword.end.ataribasic"
+              "name": "keyword.end.atari.basic"
             },
             "5": {
-              "name": "keyword.new.ataribasic"
+              "name": "keyword.new.atari.basic"
             },
             "6": {
-              "name": "keyword.stop.ataribasic"
+              "name": "keyword.stop.atari.basic"
             },
             "7": {
-              "name": "keyword.return.ataribasic"
+              "name": "keyword.return.atari.basic"
             }
           },
           "push": "line_and_statement_should_end"
         },
         {
           "match": "RU[N.]",
-          "name": "keyword.run.ataribasic",
+          "name": "keyword.run.atari.basic",
           "push": "expr_start_last"
         },
         {
           "match": "(\\?|PR(INT|(IN?)?.))\\s*(#)",
           "captures": {
             "1": {
-              "name": "keyword.print.ataribasic"
+              "name": "keyword.print.atari.basic"
             },
             "4": {
-              "name": "support.token.iocb.ataribasic"
+              "name": "support.token.iocb.atari.basic"
             }
           },
           "push": "cmd_print_dev"
         },
         {
           "match": "\\?|PR(INT|(IN?)?\\.)",
-          "name": "keyword.print.ataribasic",
+          "name": "keyword.print.atari.basic",
           "push": "cmd_print"
         },
         {
           "match": "LP(RINT|(R(IN?)?)?\\.)",
-          "name": "keyword.lprint.ataribasic",
+          "name": "keyword.lprint.atari.basic",
           "push": "cmd_print"
         },
         {
           "match": "(I(NPUT|(N(PU?)?)?\\.))\\s*(#)",
           "captures": {
             "1": {
-              "name": "keyword.input.ataribasic"
+              "name": "keyword.input.atari.basic"
             },
             "5": {
-              "name": "support.token.iocb.ataribasic"
+              "name": "support.token.iocb.atari.basic"
             }
           },
           "push": "expr_device"
         },
         {
           "match": "I(NPUT|(N(PU?)?)?\\.)",
-          "name": "keyword.input.ataribasic",
+          "name": "keyword.input.atari.basic",
           "push": "expr_start"
         },
         {
           "match": "(CL(OSE|(OS?)?\\.))\\s*(#)",
           "captures": {
             "1": {
-              "name": "keyword.close.ataribasic"
+              "name": "keyword.close.atari.basic"
             },
             "4": {
-              "name": "support.token.iocb.ataribasic"
+              "name": "support.token.iocb.atari.basic"
             }
           },
           "push": "expr_device"
@@ -377,10 +377,10 @@
           "match": "(O(PEN|(PE?)?\\.))\\s*(#)",
           "captures": {
             "1": {
-              "name": "keyword.open.ataribasic"
+              "name": "keyword.open.atari.basic"
             },
             "4": {
-              "name": "support.token.iocb.ataribasic"
+              "name": "support.token.iocb.atari.basic"
             }
           },
           "push": "expr_device"
@@ -389,33 +389,33 @@
           "match": "((GET)|(NO(TE|T?\\.))|(ST(ATUS|(A(TU?)?)?\\.)))\\s*(#)",
           "captures": {
             "2": {
-              "name": "keyword.get.ataribasic"
+              "name": "keyword.get.atari.basic"
             },
             "3": {
-              "name": "keyword.note.ataribasic"
+              "name": "keyword.note.atari.basic"
             },
             "5": {
-              "name": "keyword.status.ataribasic"
+              "name": "keyword.status.atari.basic"
             },
             "9": {
-              "name": "support.token.iocb.ataribasic"
+              "name": "support.token.iocb.atari.basic"
             }
           },
           "push": "expr_device"
         },
         {
           "match": "XIO\\b",
-          "name": "keyword.xio.ataribasic",
+          "name": "keyword.xio.atari.basic",
           "push": "cmd_xio"
         },
         {
           "match": "(PUT)\\s*(#)",
           "captures": {
             "1": {
-              "name": "keyword.get.ataribasic"
+              "name": "keyword.get.atari.basic"
             },
             "2": {
-              "name": "support.token.iocb.ataribasic"
+              "name": "support.token.iocb.atari.basic"
             }
           },
           "push": "expr_device"
@@ -424,142 +424,142 @@
           "match": "(P(OINT|(O(IN?)?)?\\.))\\s*(#)",
           "captures": {
             "1": {
-              "name": "keyword.get.ataribasic"
+              "name": "keyword.get.atari.basic"
             },
             "5": {
-              "name": "support.token.iocb.ataribasic"
+              "name": "support.token.iocb.atari.basic"
             }
           },
           "push": "expr_device"
         },
         {
           "match": "DIM|COM",
-          "name": "keyword.dim.ataribasic",
+          "name": "keyword.dim.atari.basic",
           "push": "cmd_dim_list"
         },
         {
           "match": "F(OR|O?\\.)",
-          "name": "keyword.for.ataribasic",
+          "name": "keyword.for.atari.basic",
           "push": "cmd_for"
         },
         {
           "match": "N(EXT|(EX?)?\\.)",
-          "name": "keyword.next.ataribasic",
+          "name": "keyword.next.atari.basic",
           "push": "cmd_next"
         },
         {
           "match": "T(RAP|(RA?)?\\.)",
-          "name": "keyword.trap.ataribasic",
+          "name": "keyword.trap.atari.basic",
           "push": "one_expr"
         },
         {
           "match": "POK[E.]",
-          "name": "keyword.poke.ataribasic",
+          "name": "keyword.poke.atari.basic",
           "push": "two_exprs"
         },
         {
           "match": "C(OLOR|(O(LO?)?)?\\.)",
-          "name": "keyword.color.ataribasic",
+          "name": "keyword.color.atari.basic",
           "push": "one_expr"
         },
         {
           "match": "DR(AWTO|(A(WT?)?)?\\.)",
-          "name": "keyword.drawto.ataribasic",
+          "name": "keyword.drawto.atari.basic",
           "push": "two_exprs"
         },
         {
           "match": "GR(APHICS|(A(P(H(IC?)?)?)?)?\\.)",
-          "name": "keyword.graphics.ataribasic",
+          "name": "keyword.graphics.atari.basic",
           "push": "one_expr"
         },
         {
           "match": "LOC(ATE|(AT?)?\\.)",
-          "name": "keyword.locate.ataribasic",
+          "name": "keyword.locate.atari.basic",
           "push": "three_exprs"
         },
         {
           "match": "POS(ITION|(I(T(IO?)?)?)?\\.)",
-          "name": "keyword.position.ataribasic",
+          "name": "keyword.position.atari.basic",
           "push": "two_exprs"
         },
         {
           "match": "PL(OT|O?\\.)",
-          "name": "keyword.plot.ataribasic",
+          "name": "keyword.plot.atari.basic",
           "push": "two_exprs"
         },
         {
           "match": "SE(TCOLOR|(T(C(O(LO?)?)?)?)?\\.)",
-          "name": "keyword.setcolor.ataribasic",
+          "name": "keyword.setcolor.atari.basic",
           "push": "three_exprs"
         },
         {
           "match": "SO(UND|(UN?)?\\.)",
-          "name": "keyword.sound.ataribasic",
+          "name": "keyword.sound.atari.basic",
           "push": "four_exprs"
         },
         {
           "match": "REA[D.]",
-          "name": "keyword.read.ataribasic",
+          "name": "keyword.read.atari.basic",
           "push": "expr_start"
         },
         {
           "match": "THREE",
-          "name": "keyword.three.ataribasic",
+          "name": "keyword.three.atari.basic",
           "push": "three_exprs"
         },
         {
           "match": "L(IST|(IS?)?\\.)",
-          "name": "keyword.list.ataribasic",
+          "name": "keyword.list.atari.basic",
           "push": "expr_start"
         },
         {
           "match": "(LO(AD|A?\\.))|(S(AVE|(AV?)?\\.))|(E(NTER|(N(TE?)?)?\\.))",
           "captures": {
             "1": {
-              "name": "keyword.load.ataribasic"
+              "name": "keyword.load.atari.basic"
             },
             "3": {
-              "name": "keyword.save.ataribasic"
+              "name": "keyword.save.atari.basic"
             },
             "6": {
-              "name": "keyword.enter.ataribasic"
+              "name": "keyword.enter.atari.basic"
             }
           },
           "push": "one_expr"
         },
         {
           "match": "G(OTO|(OT?)?\\.)",
-          "name": "keyword.goto.ataribasic",
+          "name": "keyword.goto.atari.basic",
           "push": "expr_start_last"
         },
         {
           "match": "GOS(UB|U?\\.)",
-          "name": "keyword.gosub.ataribasic",
+          "name": "keyword.gosub.atari.basic",
           "push": "one_expr"
         },
         {
           "match": "ON",
-          "name": "keyword.on.ataribasic",
+          "name": "keyword.on.atari.basic",
           "push": "cmd_on"
         },
         {
           "match": "IF",
-          "name": "keyword.if.ataribasic",
+          "name": "keyword.if.atari.basic",
           "push": "cmd_if"
         },
         {
           "match": "THEN",
-          "name": "keyword.then.ataribasic",
+          "name": "keyword.then.atari.basic",
           "push": "cmd_then"
         },
         {
           "match": "(LET)\\s*([A-Z][A-Z0-9]*\\$)",
           "captures": {
             "1": {
-              "name": "keyword.let.ataribasic"
+              "name": "keyword.let.atari.basic"
             },
             "2": {
-              "name": "variable.string.let.ataribasic"
+              "name": "variable.string.let.atari.basic"
             }
           },
           "push": "cmd_let"
@@ -568,10 +568,10 @@
           "match": "(VAR)\\s*([A-Z][A-Z0-9]*)",
           "captures": {
             "1": {
-              "name": "keyword.var.ataribasic"
+              "name": "keyword.var.atari.basic"
             },
             "2": {
-              "name": "variable.string.var.ataribasic"
+              "name": "variable.string.var.atari.basic"
             }
           },
           "push": "cmd_var"
@@ -582,7 +582,7 @@
       "patterns": [
         {
           "match": "\\,",
-          "name": "support.token.delimiter.list.1.ataribasic",
+          "name": "support.token.delimiter.list.1.atari.basic",
           "set": "cmd_xio_part2"
         },
         {
@@ -596,7 +596,7 @@
           "match": "\\s*(\\#[0-9{1,2}])",
           "captures": {
             "1": {
-              "name": "support.token.iocb.ataribasic"
+              "name": "support.token.iocb.atari.basic"
             }
           },
           "set": "expr_device"
@@ -606,7 +606,7 @@
     "cmd_on": {
       "patterns": [
         {
-          "meta_scope": "ctx.cmd_on.ataribasic"
+          "meta_scope": "ctx.cmd_on.atari.basic"
         },
         {
           "match": "\\s*(:|$|(GOTO|GOSUB)\\b)",
@@ -618,12 +618,12 @@
       "patterns": [
         {
           "match": "GOTO",
-          "name": "keyword.on-goto.ataribasic",
+          "name": "keyword.on-goto.atari.basic",
           "set": "on_line_list"
         },
         {
           "match": "GOSUB",
-          "name": "keyword.on-gosub.ataribasic",
+          "name": "keyword.on-gosub.atari.basic",
           "set": "on_line_list"
         },
         {
@@ -640,10 +640,10 @@
           "match": "(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?|[A-Z][A-Z0-9]*)\\s*(\\,)?",
           "captures": {
             "1": {
-              "name": "constant.numeric.line-number.ataribasic"
+              "name": "constant.numeric.line-number.atari.basic"
             },
             "2": {
-              "name": "support.token.delimiter.list.ataribasic"
+              "name": "support.token.delimiter.list.atari.basic"
             }
           }
         },
@@ -659,10 +659,10 @@
           "match": "(REM)([\\w ]*)",
           "captures": {
             "1": {
-              "name": "comment.ataribasic"
+              "name": "comment.atari.basic"
             },
             "2": {
-              "name": "comment.ataribasic"
+              "name": "comment.atari.basic"
             }
           }
         }
@@ -675,11 +675,11 @@
         },
         {
           "match": "([^,]+?)(\\s*$)?",
-          "name": "entity.literal.string.data.ataribasic"
+          "name": "entity.literal.string.data.atari.basic"
         },
         {
           "match": "\\,",
-          "name": "support.token.delimiter.data.ataribasic"
+          "name": "support.token.delimiter.data.atari.basic"
         }
       ]
     },
@@ -693,11 +693,11 @@
     "cmd_let": {
       "patterns": [
         {
-          "meta_scope": "ctx.cmd_let.ataribasic"
+          "meta_scope": "ctx.cmd_let.atari.basic"
         },
         {
           "match": "\\(",
-          "name": "support.paren.open.subscript.ataribasic",
+          "name": "support.paren.open.subscript.atari.basic",
           "push": "expr_paren_open"
         }
       ]
@@ -705,11 +705,11 @@
     "cmd_let_equals": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.cmd_let_equals.ataribasic"
+          "meta_content_scope": "ctx.cmd_let_equals.atari.basic"
         },
         {
           "match": "=",
-          "name": "keyword.operator.assignment.ataribasic",
+          "name": "keyword.operator.assignment.atari.basic",
           "set": "one_expr"
         }
       ]
@@ -717,7 +717,7 @@
     "cmd_if": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.cmd_if.ataribasic"
+          "meta_content_scope": "ctx.cmd_if.atari.basic"
         },
         {
           "match": "\\s*:|$",
@@ -730,14 +730,14 @@
           "match": "\\s*([-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?))",
           "captures": {
             "1": {
-              "name": "constant.numeric.line-number.ataribasic"
+              "name": "constant.numeric.line-number.atari.basic"
             }
           },
           "set": "line_and_statement_should_end"
         },
         {
           "match": ".",
-          "name": "support.test.ataribasic"
+          "name": "support.test.atari.basic"
         }
       ]
     },
@@ -748,11 +748,11 @@
         },
         {
           "match": "TO",
-          "name": "keyword.to.ataribasic"
+          "name": "keyword.to.atari.basic"
         },
         {
           "match": "STEP",
-          "name": "keyword.step.ataribasic"
+          "name": "keyword.step.atari.basic"
         },
         {
           "include": "#expr_start"
@@ -763,7 +763,7 @@
       "patterns": [
         {
           "match": "[A-Z][A-Z0-9]*",
-          "name": "variable.float.cmdnext.ataribasic",
+          "name": "variable.float.cmdnext.atari.basic",
           "set": "cmd_done"
         },
         {
@@ -774,23 +774,23 @@
     "cmd_dim_list": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.cmd_dim_list.ataribasic"
+          "meta_content_scope": "ctx.cmd_dim_list.atari.basic"
         },
         {
           "include": "#mixin_statement_end"
         },
         {
           "match": "\\,",
-          "name": "punctuation.definition.delimiter.list.ataribasic"
+          "name": "punctuation.definition.delimiter.list.atari.basic"
         },
         {
           "match": "[A-Z][A-Z0-9]*\\$",
-          "name": "variable.string.dim.ataribasic",
+          "name": "variable.string.dim.atari.basic",
           "push": "cmd_dim_subscript"
         },
         {
           "match": "[A-Z][A-Z0-9]*",
-          "name": "variable.float.cmddimlist.ataribasic",
+          "name": "variable.float.cmddimlist.atari.basic",
           "push": "cmd_dim_subscript"
         }
       ]
@@ -799,7 +799,7 @@
       "patterns": [
         {
           "match": "\\(",
-          "name": "support.paren.open.dim.ataribasic",
+          "name": "support.paren.open.dim.atari.basic",
           "push": "expr_paren_open"
         },
         {
@@ -811,12 +811,12 @@
       "patterns": [
         {
           "match": "[A-Z][A-Z0-9]*\\$",
-          "name": "variable.string.varname.ataribasic",
+          "name": "variable.string.varname.atari.basic",
           "push": "var_eat_subscript"
         },
         {
           "match": "[A-Z][A-Z0-9]*",
-          "name": "variable.float.mixinvarname.ataribasic",
+          "name": "variable.float.mixinvarname.atari.basic",
           "push": "var_eat_subscript"
         }
       ]
@@ -824,11 +824,11 @@
     "var_eat_subscript": {
       "patterns": [
         {
-          "meta_scope": "ctx.var_eat_subscript.ataribasic"
+          "meta_scope": "ctx.var_eat_subscript.atari.basic"
         },
         {
           "match": "\\(",
-          "name": "support.paren.open.subscript.ataribasic",
+          "name": "support.paren.open.subscript.atari.basic",
           "push": "expr_paren_open"
         },
         {
@@ -844,89 +844,89 @@
         },
         {
           "match": "CHR\\$",
-          "name": "meta.function-call.chrS.ataribasic",
+          "name": "meta.function-call.chrS.atari.basic",
           "push": "required_args"
         },
         {
           "match": "STR\\$",
-          "name": "meta.function-call.str.ataribasic",
+          "name": "meta.function-call.str.atari.basic",
           "push": "required_args"
         },
         {
           "match": "(FRE)|(USR)|(ABS)|(ADR)|(ASC)|(ATN)|(CLOG)|(COS)|(EXP)|(INT)|(LEN)|(LOG)|(PEEK)|(RND)|(SGN)|(SIN)|(SQR)|(VAL)|(PADDLE)|(PTRIG)|(STICK)|(STRIG)",
           "captures": {
             "1": {
-              "name": "meta.function-call.fre.ataribasic"
+              "name": "meta.function-call.fre.atari.basic"
             },
             "2": {
-              "name": "meta.function-call.usr.ataribasic"
+              "name": "meta.function-call.usr.atari.basic"
             },
             "3": {
-              "name": "meta.function-call.abs.ataribasic"
+              "name": "meta.function-call.abs.atari.basic"
             },
             "4": {
-              "name": "meta.function-call.adr.ataribasic"
+              "name": "meta.function-call.adr.atari.basic"
             },
             "5": {
-              "name": "meta.function-call.asc.ataribasic"
+              "name": "meta.function-call.asc.atari.basic"
             },
             "6": {
-              "name": "meta.function-call.atn.ataribasic"
+              "name": "meta.function-call.atn.atari.basic"
             },
             "7": {
-              "name": "meta.function-call.clog.ataribasic"
+              "name": "meta.function-call.clog.atari.basic"
             },
             "8": {
-              "name": "meta.function-call.cos.ataribasic"
+              "name": "meta.function-call.cos.atari.basic"
             },
             "9": {
-              "name": "meta.function-call.exp.ataribasic"
+              "name": "meta.function-call.exp.atari.basic"
             },
             "10": {
-              "name": "meta.function-call.int.ataribasic"
+              "name": "meta.function-call.int.atari.basic"
             },
             "11": {
-              "name": "meta.function-call.len.ataribasic"
+              "name": "meta.function-call.len.atari.basic"
             },
             "12": {
-              "name": "meta.function-call.log.ataribasic"
+              "name": "meta.function-call.log.atari.basic"
             },
             "13": {
-              "name": "meta.function-call.peek.ataribasic"
+              "name": "meta.function-call.peek.atari.basic"
             },
             "14": {
-              "name": "meta.function-call.rnd.ataribasic"
+              "name": "meta.function-call.rnd.atari.basic"
             },
             "15": {
-              "name": "meta.function-call.sgn.ataribasic"
+              "name": "meta.function-call.sgn.atari.basic"
             },
             "16": {
-              "name": "meta.function-call.sin.ataribasic"
+              "name": "meta.function-call.sin.atari.basic"
             },
             "17": {
-              "name": "meta.function-call.sqr.ataribasic"
+              "name": "meta.function-call.sqr.atari.basic"
             },
             "18": {
-              "name": "meta.function-call.val.ataribasic"
+              "name": "meta.function-call.val.atari.basic"
             },
             "19": {
-              "name": "meta.function-call.paddle.ataribasic"
+              "name": "meta.function-call.paddle.atari.basic"
             },
             "20": {
-              "name": "meta.function-call.ptrig.ataribasic"
+              "name": "meta.function-call.ptrig.atari.basic"
             },
             "21": {
-              "name": "meta.function-call.stick.ataribasic"
+              "name": "meta.function-call.stick.atari.basic"
             },
             "22": {
-              "name": "meta.function-call.strig.ataribasic"
+              "name": "meta.function-call.strig.atari.basic"
             }
           },
           "push": "required_args"
         },
         {
           "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
-          "name": "constant.numeric.float.ataribasic"
+          "name": "constant.numeric.float.atari.basic"
         },
         {
           "include": "#mixin_variable_name"
@@ -937,7 +937,7 @@
       "patterns": [
         {
           "match": "\\(",
-          "name": "support.paren.open.func.ataribasic",
+          "name": "support.paren.open.func.atari.basic",
           "set": "expr_paren_open"
         }
       ]
@@ -946,15 +946,15 @@
       "patterns": [
         {
           "match": "\\,",
-          "name": "support.token.delimiter.list.ataribasic"
+          "name": "support.token.delimiter.list.atari.basic"
         },
         {
           "match": "([-+*/^])",
-          "name": "keyword.operator.math.ataribasic"
+          "name": "keyword.operator.math.atari.basic"
         },
         {
           "match": "(<>|[<>]=?|=|AND|NOT|OR)",
-          "name": "keyword.operator.logic.mixin.operators.ataribasic"
+          "name": "keyword.operator.logic.mixin.operators.atari.basic"
         }
       ]
     },
@@ -962,7 +962,7 @@
       "patterns": [
         {
           "match": "([-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?))?",
-          "name": "constant.numeric.device-id.ataribasic",
+          "name": "constant.numeric.device-id.atari.basic",
           "set": "expr_start"
         }
       ]
@@ -974,7 +974,7 @@
         },
         {
           "match": "\\(",
-          "name": "support.paren.open.expr.ataribasic",
+          "name": "support.paren.open.expr.atari.basic",
           "push": "expr_paren_open"
         },
         {
@@ -992,7 +992,7 @@
     "expr_start": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.expr_start.ataribasic"
+          "meta_content_scope": "ctx.expr_start.atari.basic"
         },
         {
           "include": "#mixin_statement_end"
@@ -1005,14 +1005,14 @@
     "expr_start_last": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.expr_start_last.ataribasic"
+          "meta_content_scope": "ctx.expr_start_last.atari.basic"
         },
         {
           "include": "#mixin_top_expr"
         },
         {
           "match": ":",
-          "name": "support.token.delimiter.statement.ataribasic",
+          "name": "support.token.delimiter.statement.atari.basic",
           "set": "dead_code"
         }
       ]
@@ -1020,7 +1020,7 @@
     "expr_paren_open": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.expr_paren_open.ataribasic"
+          "meta_content_scope": "ctx.expr_paren_open.atari.basic"
         },
         {
           "include": "#mixin_containers"
@@ -1041,7 +1041,7 @@
       "patterns": [
         {
           "match": "([-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?))?",
-          "name": "constant.numeric.device-id.ataribasic",
+          "name": "constant.numeric.device-id.atari.basic",
           "set": "cmd_print"
         }
       ]
@@ -1050,7 +1050,7 @@
       "patterns": [
         {
           "match": "\\\"",
-          "name": "punctuation.definition.string.open.ataribasic",
+          "name": "punctuation.definition.string.open.atari.basic",
           "push": "quoted_string"
         }
       ]
@@ -1058,14 +1058,14 @@
     "cmd_print_old": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.cmd_print_old.ataribasic"
+          "meta_content_scope": "ctx.cmd_print_old.atari.basic"
         },
         {
           "include": "#mixin_statement_end"
         },
         {
           "match": "\\(",
-          "name": "support.paren.open.dim.ataribasic",
+          "name": "support.paren.open.dim.atari.basic",
           "push": "expr_paren_open"
         },
         {
@@ -1077,7 +1077,7 @@
         },
         {
           "match": ";",
-          "name": "support.token.delimiter.concat.ataribasic"
+          "name": "support.token.delimiter.concat.atari.basic"
         },
         {
           "include": "#mixin_operators"
@@ -1090,18 +1090,18 @@
     "cmd_print": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.cmd_print.ataribasic"
+          "meta_content_scope": "ctx.cmd_print.atari.basic"
         },
         {
           "include": "#mixin_statement_end"
         },
         {
           "match": ";",
-          "name": "support.token.delimiter.concat.ataribasic"
+          "name": "support.token.delimiter.concat.atari.basic"
         },
         {
           "match": "\\,",
-          "name": "support.token.delimiter.tab.ataribasic"
+          "name": "support.token.delimiter.tab.atari.basic"
         },
         {
           "include": "#real_expr"
@@ -1111,7 +1111,7 @@
     "quoted_string": {
       "patterns": [
         {
-          "meta_scope": "string.quoted.ataribasic"
+          "meta_scope": "string.quoted.atari.basic"
         },
         {
           "match": "[^\"]*$",
@@ -1119,14 +1119,14 @@
         },
         {
           "match": "\\\"",
-          "name": "punctuation.definition.string.close.ataribasic"
+          "name": "punctuation.definition.string.close.atari.basic"
         }
       ]
     },
     "syntax_error": {
       "patterns": [
         {
-          "meta_scope": "invalid.error.syntax.ataribasic"
+          "meta_scope": "invalid.error.syntax.atari.basic"
         },
         {
           "match": "$"
@@ -1142,10 +1142,10 @@
           "match": "\\s*(:)\\s*(REM|(RE?)?\\.)",
           "captures": {
             "1": {
-              "name": "support.token.delimiter.statement.ataribasic"
+              "name": "support.token.delimiter.statement.atari.basic"
             },
             "2": {
-              "name": "keyword.rem.shouldend.ataribasic"
+              "name": "keyword.rem.shouldend.atari.basic"
             }
           },
           "set": "cmd_rem"
@@ -1167,7 +1167,7 @@
       "patterns": [
         {
           "match": ":",
-          "name": "support.token.delimiter.statement.ataribasic",
+          "name": "support.token.delimiter.statement.atari.basic",
           "set": "dead_code"
         }
       ]
@@ -1176,7 +1176,7 @@
       "patterns": [
         {
           "match": ":",
-          "name": "support.token.delimiter.statement.ataribasic"
+          "name": "support.token.delimiter.statement.atari.basic"
         },
         {
           "match": "REM|(RE?)?\\.",
@@ -1188,7 +1188,7 @@
     "marked_dead": {
       "patterns": [
         {
-          "meta_scope": "invalid.warning.dead-code.ataribasic"
+          "meta_scope": "invalid.warning.dead-code.atari.basic"
         },
         {
           "include": "#code_line"
@@ -1209,24 +1209,24 @@
     "expr_eat_modifier": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.expr_eat_modifier.ataribasic"
+          "meta_content_scope": "ctx.expr_eat_modifier.atari.basic"
         },
         {
           "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
-          "name": "constant.numeric.float.ataribasic",
+          "name": "constant.numeric.float.atari.basic",
           "set": "expr_wants_operator"
         },
         {
           "match": "(NOT)|(-)|(\\+)",
           "captures": {
             "1": {
-              "name": "keyword.operator.logic.expr.modifiers.ataribasic"
+              "name": "keyword.operator.logic.expr.modifiers.atari.basic"
             },
             "2": {
-              "name": "keyword.operator.negative.ataribasic"
+              "name": "keyword.operator.negative.atari.basic"
             },
             "3": {
-              "name": "keyword.operator.positive.ataribasic"
+              "name": "keyword.operator.positive.atari.basic"
             }
           },
           "set": "expr_2nd_modifier"
@@ -1236,11 +1236,11 @@
     "expr_2nd_modifier": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.expr_2nd_modifier.ataribasic"
+          "meta_content_scope": "ctx.expr_2nd_modifier.atari.basic"
         },
         {
           "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
-          "name": "constant.numeric.float.ataribasic",
+          "name": "constant.numeric.float.atari.basic",
           "set": "expr_wants_operator"
         },
         {
@@ -1252,11 +1252,11 @@
     "expr_wants_value": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.expr_wants_value.ataribasic"
+          "meta_content_scope": "ctx.expr_wants_value.atari.basic"
         },
         {
           "match": "CHR\\$",
-          "name": "meta.funct}ion-call.chrS.ataribasic",
+          "name": "meta.funct}ion-call.chrS.atari.basic",
           "set": [
             "expr_wants_operator",
             "required_args"
@@ -1264,7 +1264,7 @@
         },
         {
           "match": "STR\\$",
-          "name": "meta.funct}ion-call.str.ataribasic",
+          "name": "meta.funct}ion-call.str.atari.basic",
           "set": [
             "expr_wants_operator",
             "required_args"
@@ -1274,70 +1274,70 @@
           "match": "(FRE)|(USR)|(ABS)|(ADR)|(ASC)|(ATN)|(CLOG)|(COS)|(EXP)|(INT)|(LEN)|(LOG)|(PEEK)|(RND)|(SGN)|(SIN)|(SQR)|(VAL)|(PADDLE)|(PTRIG)|(STICK)|(STRIG)",
           "captures": {
             "1": {
-              "name": "meta.function-call.fre.ataribasic"
+              "name": "meta.function-call.fre.atari.basic"
             },
             "2": {
-              "name": "meta.function-call.usr.ataribasic"
+              "name": "meta.function-call.usr.atari.basic"
             },
             "3": {
-              "name": "meta.function-call.abs.ataribasic"
+              "name": "meta.function-call.abs.atari.basic"
             },
             "4": {
-              "name": "meta.function-call.adr.ataribasic"
+              "name": "meta.function-call.adr.atari.basic"
             },
             "5": {
-              "name": "meta.function-call.asc.ataribasic"
+              "name": "meta.function-call.asc.atari.basic"
             },
             "6": {
-              "name": "meta.function-call.atn.ataribasic"
+              "name": "meta.function-call.atn.atari.basic"
             },
             "7": {
-              "name": "meta.function-call.clog.ataribasic"
+              "name": "meta.function-call.clog.atari.basic"
             },
             "8": {
-              "name": "meta.function-call.cos.ataribasic"
+              "name": "meta.function-call.cos.atari.basic"
             },
             "9": {
-              "name": "meta.function-call.exp.ataribasic"
+              "name": "meta.function-call.exp.atari.basic"
             },
             "10": {
-              "name": "meta.function-call.int.ataribasic"
+              "name": "meta.function-call.int.atari.basic"
             },
             "11": {
-              "name": "meta.function-call.len.ataribasic"
+              "name": "meta.function-call.len.atari.basic"
             },
             "12": {
-              "name": "meta.function-call.log.ataribasic"
+              "name": "meta.function-call.log.atari.basic"
             },
             "13": {
-              "name": "meta.function-call.peek.ataribasic"
+              "name": "meta.function-call.peek.atari.basic"
             },
             "14": {
-              "name": "meta.function-call.rnd.ataribasic"
+              "name": "meta.function-call.rnd.atari.basic"
             },
             "15": {
-              "name": "meta.function-call.sgn.ataribasic"
+              "name": "meta.function-call.sgn.atari.basic"
             },
             "16": {
-              "name": "meta.function-call.sin.ataribasic"
+              "name": "meta.function-call.sin.atari.basic"
             },
             "17": {
-              "name": "meta.function-call.sqr.ataribasic"
+              "name": "meta.function-call.sqr.atari.basic"
             },
             "18": {
-              "name": "meta.function-call.val.ataribasic"
+              "name": "meta.function-call.val.atari.basic"
             },
             "19": {
-              "name": "meta.function-call.paddle.ataribasic"
+              "name": "meta.function-call.paddle.atari.basic"
             },
             "20": {
-              "name": "meta.function-call.ptrig.ataribasic"
+              "name": "meta.function-call.ptrig.atari.basic"
             },
             "21": {
-              "name": "meta.function-call.stick.ataribasic"
+              "name": "meta.function-call.stick.atari.basic"
             },
             "22": {
-              "name": "meta.function-call.strig.ataribasic"
+              "name": "meta.function-call.strig.atari.basic"
             }
           },
           "set": [
@@ -1347,17 +1347,17 @@
         },
         {
           "match": "\\(",
-          "name": "support.paren.open.ataribasic",
+          "name": "support.paren.open.atari.basic",
           "set": "expr_till_close"
         },
         {
           "match": "\\\"",
-          "name": "punctuation.definition.string.open.ataribasic",
+          "name": "punctuation.definition.string.open.atari.basic",
           "set": "expr_eat_string"
         },
         {
           "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
-          "name": "variable.float.exprwantsvalue.ataribasic",
+          "name": "variable.float.exprwantsvalue.atari.basic",
           "set": "expr_wants_operator"
         },
         {
@@ -1366,12 +1366,12 @@
         },
         {
           "match": "[A-Z][A-Z0-9]*\\$",
-          "name": "variable.string.expr_wants.ataribasic",
+          "name": "variable.string.expr_wants.atari.basic",
           "set": "expr_eat_subscript"
         },
         {
           "match": "[A-Z][A-Z0-9]*",
-          "name": "variable.float.exprwantsvalue2.ataribasic",
+          "name": "variable.float.exprwantsvalue2.atari.basic",
           "set": "expr_eat_subscript"
         }
       ]
@@ -1379,7 +1379,7 @@
     "expr_wants_operator": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.expr_wants_operator.ataribasic"
+          "meta_content_scope": "ctx.expr_wants_operator.atari.basic"
         },
         {
           "match": "((<>|[<>]=|[-+*/^<=>]|AND|OR)\\s*(:|$))",
@@ -1387,39 +1387,39 @@
         },
         {
           "match": "[-+*/^]",
-          "name": "keyword.operator.math.ataribasic",
+          "name": "keyword.operator.math.atari.basic",
           "set": "expr_eat_modifier"
         },
         {
           "match": "<>|[<>]=?|=|AND|OR",
-          "name": "keyword.operator.logic.expr.wants.operator.ataribasic",
+          "name": "keyword.operator.logic.expr.wants.operator.atari.basic",
           "set": "expr_eat_modifier"
         },
         {
           "match": "(THEN)\\s*([-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?))",
           "captures": {
             "1": {
-              "name": "keyword.then.ataribasic"
+              "name": "keyword.then.atari.basic"
             },
             "2": {
-              "name": "constant.numeric.line-number.ataribasic"
+              "name": "constant.numeric.line-number.atari.basic"
             }
           },
           "set": "line_and_statement_should_end"
         },
         {
           "match": "THEN",
-          "name": "keyword.then.ataribasic",
+          "name": "keyword.then.atari.basic",
           "set": "code_line"
         },
         {
           "match": "(GOTO)|(GOSUB)",
           "captures": {
             "1": {
-              "name": "keyword.goto.ataribasic"
+              "name": "keyword.goto.atari.basic"
             },
             "2": {
-              "name": "keyword.gosub.ataribasic"
+              "name": "keyword.gosub.atari.basic"
             }
           }
         },
@@ -1435,7 +1435,7 @@
     "expr_wants_comparison": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.expr_wants_comparison.ataribasic"
+          "meta_content_scope": "ctx.expr_wants_comparison.atari.basic"
         },
         {
           "match": "(<>|[<>]=?|=)\\s*(:|$)",
@@ -1443,34 +1443,34 @@
         },
         {
           "match": "<>|[<>]=?|=",
-          "name": "keyword.operator.logic.ataribasic",
+          "name": "keyword.operator.logic.atari.basic",
           "set": "expr_eat_modifier"
         },
         {
           "match": "(THEN)\\s*([-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?))",
           "captures": {
             "1": {
-              "name": "keyword.then.ataribasic"
+              "name": "keyword.then.atari.basic"
             },
             "2": {
-              "name": "constant.numeric.line-number.ataribasic"
+              "name": "constant.numeric.line-number.atari.basic"
             }
           },
           "set": "line_and_statement_should_end"
         },
         {
           "match": "THEN",
-          "name": "keyword.then.ataribasic",
+          "name": "keyword.then.atari.basic",
           "set": "code_line"
         },
         {
           "match": "(GOTO)|(GOSUB)",
           "captures": {
             "1": {
-              "name": "keyword.goto.ataribasic"
+              "name": "keyword.goto.atari.basic"
             },
             "2": {
-              "name": "keyword.gosub.ataribasic"
+              "name": "keyword.gosub.atari.basic"
             }
           }
         },
@@ -1486,13 +1486,13 @@
     "expr_eat_subscript": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.expr_eat_subscript.ataribasic"
+          "meta_content_scope": "ctx.expr_eat_subscript.atari.basic"
         },
         {
           "match": "\\s*(\\()",
           "captures": {
             "1": {
-              "name": "support.paren.open.subscript.ataribasic"
+              "name": "support.paren.open.subscript.atari.basic"
             }
           },
           "set": "expr_till_close"
@@ -1502,7 +1502,7 @@
     "expr_eat_string": {
       "patterns": [
         {
-          "meta_scope": "string.quoted.ataribasic"
+          "meta_scope": "string.quoted.atari.basic"
         },
         {
           "match": "$"
@@ -1511,7 +1511,7 @@
           "match": "[^\"]*(\")",
           "captures": {
             "1": {
-              "name": "punctuation.definition.string.close.ataribasic"
+              "name": "punctuation.definition.string.close.atari.basic"
             }
           },
           "set": "expr_wants_operator"
@@ -1521,7 +1521,7 @@
     "expr_till_close": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.expr_till_close.ataribasic"
+          "meta_content_scope": "ctx.expr_till_close.atari.basic"
         },
         {
           "match": "[^)]*(;:|$)",
@@ -1532,12 +1532,12 @@
         },
         {
           "match": "\\)",
-          "name": "support.paren.close.subscript.ataribasic",
+          "name": "support.paren.close.subscript.atari.basic",
           "set": "expr_wants_operator"
         },
         {
           "match": "\\,",
-          "name": "support.token.delimiter.subscripts.ataribasic"
+          "name": "support.token.delimiter.subscripts.atari.basic"
         },
         {
           "match": "",
@@ -1548,7 +1548,7 @@
     "expr_wants_float": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.expr_wants_float.ataribasic"
+          "meta_content_scope": "ctx.expr_wants_float.atari.basic"
         },
         {
           "match": "[A-Z][A-Z0-9]*\\$",
@@ -1556,12 +1556,12 @@
         },
         {
           "match": "[A-Z][A-Z0-9]*",
-          "name": "variable.float.exprwantsfloat.ataribasic",
+          "name": "variable.float.exprwantsfloat.atari.basic",
           "set": "expr_eat_subscript"
         },
         {
           "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
-          "name": "constant.numeric.float.ataribasic",
+          "name": "constant.numeric.float.atari.basic",
           "set": "expr_wants_operator"
         }
       ]
@@ -1570,7 +1570,7 @@
       "patterns": [
         {
           "match": "[A-Z][A-Z0-9]*\\$",
-          "name": "variable.string.expr_wants_string.ataribasic",
+          "name": "variable.string.expr_wants_string.atari.basic",
           "set": "expr_wants_operator"
         },
         {
@@ -1585,12 +1585,12 @@
         },
         {
           "match": "\\(",
-          "name": "support.paren.open.expr.ataribasic",
+          "name": "support.paren.open.expr.atari.basic",
           "push": "expr_paren_open"
         },
         {
           "match": "\\)",
-          "name": "support.paren.close.ataribasic"
+          "name": "support.paren.close.atari.basic"
         }
       ]
     },
@@ -1604,14 +1604,14 @@
         },
         {
           "match": "(<>|[<>]=?|=|AND|NOT|OR)",
-          "name": "keyword.operator.logic.mixin.some.ataribasic"
+          "name": "keyword.operator.logic.mixin.some.atari.basic"
         },
         {
           "include": "#mixin_values"
         },
         {
           "match": "\\(",
-          "name": "support.paren.open.expr.ataribasic",
+          "name": "support.paren.open.expr.atari.basic",
           "push": "expr_paren_open"
         },
         {
@@ -1624,7 +1624,7 @@
         },
         {
           "match": "([-+*/^])",
-          "name": "keyword.operator.math.ataribasic"
+          "name": "keyword.operator.math.atari.basic"
         }
       ]
     },
@@ -1639,7 +1639,7 @@
     "two_exprs": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.two_exprs.ataribasic"
+          "meta_content_scope": "ctx.two_exprs.atari.basic"
         },
         {
           "match": "\\s*:|$",
@@ -1649,7 +1649,7 @@
           "match": "\\s*(,)",
           "captures": {
             "1": {
-              "name": "support.token.delimiter.list.1.ataribasic"
+              "name": "support.token.delimiter.list.1.atari.basic"
             }
           },
           "set": "one_expr"
@@ -1662,7 +1662,7 @@
     "three_exprs": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.three_exprs.ataribasic"
+          "meta_content_scope": "ctx.three_exprs.atari.basic"
         },
         {
           "match": "\\s*:|$",
@@ -1672,7 +1672,7 @@
           "match": "\\s*(,)",
           "captures": {
             "1": {
-              "name": "support.token.delimiter.list.2.ataribasic"
+              "name": "support.token.delimiter.list.2.atari.basic"
             }
           },
           "set": "two_exprs"
@@ -1685,7 +1685,7 @@
     "four_exprs": {
       "patterns": [
         {
-          "meta_content_scope": "ctx.four_exprs.ataribasic"
+          "meta_content_scope": "ctx.four_exprs.atari.basic"
         },
         {
           "match": "\\s*:|$",
@@ -1695,7 +1695,7 @@
           "match": "\\s*(,)",
           "captures": {
             "1": {
-              "name": "support.token.delimiter.list.3.ataribasic"
+              "name": "support.token.delimiter.list.3.atari.basic"
             }
           },
           "set": "three_exprs"
@@ -1713,7 +1713,7 @@
         },
         {
           "match": ":|$",
-          "name": "support.token.delimiter.statement.ataribasic"
+          "name": "support.token.delimiter.statement.atari.basic"
         }
       ]
     }
