@@ -6,6 +6,328 @@
     "This file is a modified version of https://github.com/thinkyhead/6502-Tools/blob/master/Sublime/AtariTools/AtariBASIC.sublime-syntax"
   ],
   "first_line_match": "\\d+ (\\?|BYE|C(OLOR|L(OSE|OAD|R)|OM|ONT|SAVE)|D(ATA|IM|OS|RAWTO)|EN(TER|D)|FOR|G(ET|O(SUB|TO)|RAPHICS)|IF|INPUT|L(ET|IST|OAD|OCATE|PRINT)|NE(W|XT)|NOTE|ON|OPEN|P(LOT|O(INT|KE|P|SITION)|RINT|UT)|RE(AD|M|STORE|TURN)|RUN|S(AVE|ETCOLOR|OUND|TATUS|TOP)|TRAP)([ :]|$)",
-  "patterns": [],
-  "repository": {}
+  "patterns": [
+    {
+      "include": "#main"
+    }
+  ],
+  "repository": {
+    "main": {
+      "patterns": [
+        {
+          "match": "^(.{254})(\\S.+?)\\s*$",
+          "captures": {
+            "1": {
+              "name": "invalid.warning.line-too-long.ataribasic"
+            },
+            "2": {
+              "name": "invalid.error.line-too-long.ataribasic"
+            }
+          }
+        },
+        {
+          "match": "\\s+"
+        },
+        {
+          "match": "([-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?))\\s*ERROR\\s*-.*",
+          "name": "invalid.error.line.ataribasic",
+          "push": "syntax_error"
+        },
+        {
+          "comment": "A code line starting with a number. Float and scientific notation allowed",
+          "begin": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
+          "beginCaptures": {
+            "1": {"name": "constant.numeric.line-number.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#code_line"}]
+        },
+        {
+          "comment": "A raw code line - without a leading number",
+          "begin": "^",
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#code_line"}]
+        }
+      ]
+    },
+
+    "code_line": {
+      "patterns": [
+        {
+          "begin": "(REM|(RE?)?\\.)",
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "name":"comment.line"
+        },
+        {
+          "begin": "(D(ATA|(AT?)?\\.))\\s*",
+          "beginCaptures": {"1": {"name": "keyword.data.ataribasic"}},
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#cmd_data"}]
+        }
+      ]
+    },
+    "code_line_todo_and_not_done": {
+      "patterns": [
+        {
+          "match": "RES(TORE|(T(O(RE?)?)?)?\\.)",
+          "scope": "keyword.restore.ataribasic",
+          "push": "expr_start"
+        },
+        {
+          "match": "(CLR)|(CON[T.])|(DEG)|(POP)|(RAD)|(CLOAD)|(CS(AVE|(AV?)?\\.))",
+          "captures": {
+            "1": "keyword.clr.ataribasic",
+            "2": "keyword.cont.ataribasic",
+            "3": "keyword.deg.ataribasic",
+            "4": "keyword.pop.ataribasic",
+            "5": "keyword.rad.ataribasic",
+            "6": "keyword.cload.ataribasic",
+            "7": "keyword.csave.ataribasic"
+          },
+          "push": "cmd_done"
+        },
+        {
+          "match": "(B(YE|Y?\\.))|(DOS)|(END)|(NEW)|(STO[P.])|(RET(URN|(UR?)?\\.))",
+          "captures": {
+            "1": "keyword.bye.ataribasic",
+            "3": "keyword.dos.ataribasic",
+            "4": "keyword.end.ataribasic",
+            "5": "keyword.new.ataribasic",
+            "6": "keyword.stop.ataribasic",
+            "7": "keyword.return.ataribasic"
+          },
+          "push": "line_and_statement_should_end"
+        },
+        {
+          "match": "RU[N.]",
+          "scope": "keyword.run.ataribasic",
+          "push": "expr_start_last"
+        },
+        {
+          "match": "(\\?|PR(INT|(IN?)?.))\\s*(#)",
+          "captures": {
+            "1": "keyword.print.ataribasic",
+            "4": "support.token.iocb.ataribasic"
+          },
+          "push": "cmd_print_dev"
+        },
+        {
+          "match": "\\?|PR(INT|(IN?)?\\.)",
+          "scope": "keyword.print.ataribasic",
+          "push": "cmd_print"
+        },
+        {
+          "match": "LP(RINT|(R(IN?)?)?\\.)",
+          "scope": "keyword.lprint.ataribasic",
+          "push": "cmd_print"
+        },
+        {
+          "match": "(I(NPUT|(N(PU?)?)?\\.))\\s*(#)",
+          "captures": {
+            "1": "keyword.input.ataribasic",
+            "5": "support.token.iocb.ataribasic"
+          },
+          "push": "expr_device"
+        },
+        {
+          "match": "I(NPUT|(N(PU?)?)?\\.)",
+          "scope": "keyword.input.ataribasic",
+          "push": "expr_start"
+        },
+        {
+          "match": "(CL(OSE|(OS?)?\\.))\\s*(#)",
+          "captures": {
+            "1": "keyword.close.ataribasic",
+            "4": "support.token.iocb.ataribasic"
+          },
+          "push": "expr_device"
+        },
+        {
+          "match": "(O(PEN|(PE?)?\\.))\\s*(#)",
+          "captures": {
+            "1": "keyword.open.ataribasic",
+            "4": "support.token.iocb.ataribasic"
+          },
+          "push": "expr_device"
+        },
+        {
+          "match": "((GET)|(NO(TE|T?\\.))|(ST(ATUS|(A(TU?)?)?\\.)))\\s*(#)",
+          "captures": {
+            "2": "keyword.get.ataribasic",
+            "3": "keyword.note.ataribasic",
+            "5": "keyword.status.ataribasic",
+            "9": "support.token.iocb.ataribasic"
+          },
+          "push": "expr_device"
+        },
+        {
+          "match": "XIO\\b",
+          "scope": "keyword.xio.ataribasic",
+          "push": "cmd_xio"
+        },
+        {
+          "match": "(PUT)\\s*(#)",
+          "captures": {
+            "1": "keyword.get.ataribasic",
+            "2": "support.token.iocb.ataribasic"
+          },
+          "push": "expr_device"
+        },
+        {
+          "match": "(P(OINT|(O(IN?)?)?\\.))\\s*(#)",
+          "captures": {
+            "1": "keyword.get.ataribasic",
+            "5": "support.token.iocb.ataribasic"
+          },
+          "push": "expr_device"
+        },
+        {
+          "match": "DIM|COM",
+          "scope": "keyword.dim.ataribasic",
+          "push": "cmd_dim_list"
+        },
+        {
+          "match": "F(OR|O?\\.)",
+          "scope": "keyword.for.ataribasic",
+          "push": "cmd_for"
+        },
+        {
+          "match": "N(EXT|(EX?)?\\.)",
+          "scope": "keyword.next.ataribasic",
+          "push": "cmd_next"
+        },
+        {
+          "match": "T(RAP|(RA?)?\\.)",
+          "scope": "keyword.trap.ataribasic",
+          "push": "one_expr"
+        },
+        {
+          "match": "POK[E.]",
+          "scope": "keyword.poke.ataribasic",
+          "push": "two_exprs"
+        },
+        {
+          "match": "C(OLOR|(O(LO?)?)?\\.)",
+          "scope": "keyword.color.ataribasic",
+          "push": "one_expr"
+        },
+        {
+          "match": "DR(AWTO|(A(WT?)?)?\\.)",
+          "scope": "keyword.drawto.ataribasic",
+          "push": "two_exprs"
+        },
+        {
+          "match": "GR(APHICS|(A(P(H(IC?)?)?)?)?\\.)",
+          "scope": "keyword.graphics.ataribasic",
+          "push": "one_expr"
+        },
+        {
+          "match": "LOC(ATE|(AT?)?\\.)",
+          "scope": "keyword.locate.ataribasic",
+          "push": "three_exprs"
+        },
+        {
+          "match": "POS(ITION|(I(T(IO?)?)?)?\\.)",
+          "scope": "keyword.position.ataribasic",
+          "push": "two_exprs"
+        },
+        {
+          "match": "PL(OT|O?\\.)",
+          "scope": "keyword.plot.ataribasic",
+          "push": "two_exprs"
+        },
+        {
+          "match": "SE(TCOLOR|(T(C(O(LO?)?)?)?)?\\.)",
+          "scope": "keyword.setcolor.ataribasic",
+          "push": "three_exprs"
+        },
+        {
+          "match": "SO(UND|(UN?)?\\.)",
+          "scope": "keyword.sound.ataribasic",
+          "push": "four_exprs"
+        },
+        {
+          "match": "REA[D.]",
+          "scope": "keyword.read.ataribasic",
+          "push": "expr_start"
+        },
+        {
+          "match": "THREE",
+          "scope": "keyword.three.ataribasic",
+          "push": "three_exprs"
+        },
+        {
+          "match": "L(IST|(IS?)?\\.)",
+          "scope": "keyword.list.ataribasic",
+          "push": "expr_start"
+        },
+        {
+          "match": "(LO(AD|A?\\.))|(S(AVE|(AV?)?\\.))|(E(NTER|(N(TE?)?)?\\.))",
+          "captures": {
+            "1": "keyword.load.ataribasic",
+            "3": "keyword.save.ataribasic",
+            "6": "keyword.enter.ataribasic"
+          },
+          "push": "one_expr"
+        },
+        {
+          "match": "G(OTO|(OT?)?\\.)",
+          "scope": "keyword.goto.ataribasic",
+          "push": "expr_start_last"
+        },
+        {
+          "match": "GOS(UB|U?\\.)",
+          "scope": "keyword.gosub.ataribasic",
+          "push": "one_expr"
+        },
+        {
+          "match": "ON",
+          "scope": "keyword.on.ataribasic",
+          "push": "cmd_on"
+        },
+        {
+          "match": "IF",
+          "scope": "keyword.if.ataribasic",
+          "push": "cmd_if"
+        },
+        {
+          "match": "(LET)?\\s*([A-Z][A-Z0-9]*\\$)",
+          "captures": {
+            "1": "keyword.let.ataribasic",
+            "2": "variable.string.ataribasic"
+          },
+          "push": "cmd_let"
+        },
+        {
+          "match": "(LET)?\\s*[A-Z][A-Z0-9]*",
+          "captures": {
+            "1": "keyword.let.ataribasic",
+            "2": "variable.float.ataribasic"
+          },
+          "push": "cmd_let"
+        },
+        {
+          "match": "",
+          "set": "syntax_error"
+        }
+      ]
+    },
+
+    "cmd_data": {
+      "patterns": [
+        {
+          "match": "([^,]+?)(\\s*$)?",
+          "name": "entity.literal.string.data.ataribasic"
+        },
+        {
+          "match": "\\,",
+          "name": "support.token.delimiter.data.ataribasic"
+        }
+      ]
+    }
+  }
 }

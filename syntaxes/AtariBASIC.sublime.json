@@ -10,7 +10,7 @@
   "variables": {
     "var": "[A-Z][A-Z0-9]*",
     "num": "\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?",
-    "flt": "[-+]?({{num}})"
+    "flt": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)"
   },
   "contexts": {
     "prototype": [
@@ -377,7 +377,7 @@
         "include": "mixin_statement_end"
       },
       {
-        "match": "({{num}}|{{var}})\\s*(\\,)?",
+        "match": "([-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)|[A-Z][A-Z0-9]*)\\s*(\\,)?",
         "captures": {
           "1": "constant.numeric.line-number.ataribasic",
           "2": "support.token.delimiter.list.ataribasic"
@@ -460,7 +460,7 @@
         "include": "real_expr"
       },
       {
-        "match": "\\s*({{flt}})",
+        "match": "\\s*[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
         "captures": {
           "1": "constant.numeric.line-number.ataribasic"
         },
@@ -490,7 +490,7 @@
     ],
     "cmd_next": [
       {
-        "match": "{{var}}",
+        "match": "[A-Z][A-Z0-9]*",
         "scope": "variable.float.ataribasic",
         "set": "cmd_done"
       },
@@ -511,12 +511,12 @@
         "scope": "punctuation.definition.delimiter.list.ataribasic"
       },
       {
-        "match": "{{var}}\\$",
+        "match": "[A-Z][A-Z0-9]*\\$",
         "scope": "variable.string.ataribasic",
         "push": "cmd_dim_subscript"
       },
       {
-        "match": "{{var}}",
+        "match": "[A-Z][A-Z0-9]*",
         "scope": "variable.float.ataribasic",
         "push": "cmd_dim_subscript"
       }
@@ -534,12 +534,12 @@
     ],
     "mixin_variable_name": [
       {
-        "match": "{{var}}\\$",
+        "match": "[A-Z][A-Z0-9]*\\$",
         "scope": "variable.string.ataribasic",
         "push": "var_eat_subscript"
       },
       {
-        "match": "{{var}}",
+        "match": "[A-Z][A-Z0-9]*",
         "scope": "variable.float.ataribasic",
         "push": "var_eat_subscript"
       }
@@ -602,7 +602,7 @@
         "push": "required_args"
       },
       {
-        "match": "{{flt}}",
+        "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
         "scope": "constant.numeric.float.ataribasic"
       },
       {
@@ -636,7 +636,7 @@
     ],
     "expr_device": [
       {
-        "match": "({{flt}})?",
+        "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)?",
         "scope": "constant.numeric.device-id.ataribasic",
         "set": "expr_start"
       }
@@ -705,7 +705,7 @@
     ],
     "cmd_print_dev": [
       {
-        "match": "({{flt}})?",
+        "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)?",
         "scope": "constant.numeric.device-id.ataribasic",
         "set": "cmd_print"
       }
@@ -865,7 +865,7 @@
         "meta_content_scope": "ctx.expr_eat_modifier.ataribasic"
       },
       {
-        "match": "{{flt}}",
+        "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
         "scope": "constant.numeric.float.ataribasic",
         "set": "expr_wants_operator"
       },
@@ -888,7 +888,7 @@
         "meta_content_scope": "ctx.expr_2nd_modifier.ataribasic"
       },
       {
-        "match": "{{flt}}",
+        "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
         "scope": "constant.numeric.float.ataribasic",
         "set": "expr_wants_operator"
       },
@@ -963,7 +963,7 @@
         "set": "expr_eat_string"
       },
       {
-        "match": "{{flt}}",
+        "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
         "scope": "variable.float.ataribasic",
         "set": "expr_wants_operator"
       },
@@ -973,12 +973,12 @@
         "set": "syntax_error"
       },
       {
-        "match": "{{var}}\\$",
+        "match": "[A-Z][A-Z0-9]*\\$",
         "scope": "variable.string.ataribasic",
         "set": "expr_eat_subscript"
       },
       {
-        "match": "{{var}}",
+        "match": "[A-Z][A-Z0-9]*",
         "scope": "variable.float.ataribasic",
         "set": "expr_eat_subscript"
       },
@@ -1006,7 +1006,7 @@
         "set": "expr_eat_modifier"
       },
       {
-        "match": "(THEN)\\s*({{flt}})",
+        "match": "(THEN)\\s*[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
         "captures": {
           "1": "keyword.then.ataribasic",
           "2": "constant.numeric.line-number.ataribasic"
@@ -1027,7 +1027,7 @@
         "pop": true
       },
       {
-        "match": "({{var}})|({{flt}})|\\(",
+        "match": "[A-Z][A-Z0-9]*|[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)|\\(",
         "set": "syntax_error"
       },
       {
@@ -1049,7 +1049,7 @@
         "set": "expr_eat_modifier"
       },
       {
-        "match": "(THEN)\\s*({{flt}})",
+        "match": "(THEN)\\s*[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
         "captures": {
           "1": "keyword.then.ataribasic",
           "2": "constant.numeric.line-number.ataribasic"
@@ -1070,7 +1070,7 @@
         "pop": true
       },
       {
-        "match": "({{var}})|({{flt}})|\\(",
+        "match": "[A-Z][A-Z0-9]*|[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)|\\(",
         "set": "syntax_error"
       },
       {
@@ -1144,16 +1144,16 @@
         "meta_content_scope": "ctx.expr_wants_float.ataribasic"
       },
       {
-        "match": "{{var}}\\$",
+        "match": "[A-Z][A-Z0-9]*\\$",
         "set": "syntax_error"
       },
       {
-        "match": "{{var}}",
+        "match": "[A-Z][A-Z0-9]*",
         "scope": "variable.float.ataribasic",
         "set": "expr_eat_subscript"
       },
       {
-        "match": "{{flt}}",
+        "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
         "scope": "constant.numeric.float.ataribasic",
         "set": "expr_wants_operator"
       },
@@ -1164,7 +1164,7 @@
     ],
     "expr_wants_string": [
       {
-        "match": "{{var}}\\$",
+        "match": "[A-Z][A-Z0-9]*\\$",
         "scope": "variable.string.ataribasic",
         "set": "expr_wants_operator"
       },
