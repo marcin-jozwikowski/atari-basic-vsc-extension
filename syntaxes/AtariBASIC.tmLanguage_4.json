@@ -39,15 +39,15 @@
           "beginCaptures": {
             "1": {"name": "constant.numeric.line-number.ataribasic"}
           },
-          "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "end": "$",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic1"}},
           "patterns": [{"include": "#code_line"}]
         },
         {
           "comment": "A raw code line - without a leading number",
           "begin": "^",
-          "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "end": "$",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic2"}},
           "patterns": [{"include": "#code_line"}]
         }
       ]
@@ -58,38 +58,39 @@
         {
           "begin": "(REM|(RE?)?\\.)",
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic3"}},
           "name":"comment.line"
         },
         {
           "begin": "(D(ATA|(AT?)?\\.))\\s*",
           "beginCaptures": {"1": {"name": "keyword.data.ataribasic"}},
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic4"}},
           "patterns": [{"include": "#cmd_data"}]
+        },
+        {
+          "begin": "(RES(TORE|(T(O(RE?)?)?)?\\.))",
+          "beginCaptures": {"1":{ "name": "keyword.restore.ataribasic"}},
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic5"}},
+          "patterns": [{"include": "#expr_start"}]
+        },
+        {
+          "match": "(CLR)|(CON[T.])|(DEG)|(POP)|(RAD)|(CLOAD)|(CS(AVE|(AV?)?\\.))",
+          "captures": {
+            "1": {"name": "keyword.clr.ataribasic"},
+            "2": {"name": "keyword.cont.ataribasic"},
+            "3": {"name": "keyword.deg.ataribasic"},
+            "4": {"name": "keyword.pop.ataribasic"},
+            "5": {"name": "keyword.rad.ataribasic"},
+            "6": {"name": "keyword.cload.ataribasic"},
+            "7": {"name": "keyword.csave.ataribasic"}
+          }
         }
       ]
     },
     "code_line_todo_and_not_done": {
       "patterns": [
-        {
-          "match": "RES(TORE|(T(O(RE?)?)?)?\\.)",
-          "scope": "keyword.restore.ataribasic",
-          "push": "expr_start"
-        },
-        {
-          "match": "(CLR)|(CON[T.])|(DEG)|(POP)|(RAD)|(CLOAD)|(CS(AVE|(AV?)?\\.))",
-          "captures": {
-            "1": "keyword.clr.ataribasic",
-            "2": "keyword.cont.ataribasic",
-            "3": "keyword.deg.ataribasic",
-            "4": "keyword.pop.ataribasic",
-            "5": "keyword.rad.ataribasic",
-            "6": "keyword.cload.ataribasic",
-            "7": "keyword.csave.ataribasic"
-          },
-          "push": "cmd_done"
-        },
         {
           "match": "(B(YE|Y?\\.))|(DOS)|(END)|(NEW)|(STO[P.])|(RET(URN|(UR?)?\\.))",
           "captures": {
@@ -312,7 +313,7 @@
         },
         {
           "match": "",
-          "set": "syntax_error"
+          "name": "syntax_error"
         }
       ]
     },
@@ -325,7 +326,227 @@
         },
         {
           "match": "\\,",
-          "name": "support.token.delimiter.data.ataribasic"
+          "name": "support.token.delimiter.data.ataribasic6"
+        }
+      ]
+    },
+    "cmd_done" : {
+      "patterns": [
+        {
+          "include": "#mixin_statement_end"
+        },
+        {
+          "match": "",
+          "name": "syntax_error"
+        }
+      ]
+    },
+    "expr_paren_open":{
+      "patterns": [
+        {
+          "include": "#mixin_containers"
+        },
+        {
+          "include": "#mixin_values"
+        },
+        {
+          "include": "#mixin_operators"
+        },
+        {
+          "match": "[^)]*(;:|$)",
+          "name": "syntax_error"
+        }
+      ]
+    },
+    "expr_start":{
+      "patterns": [
+        {
+          "include": "#mixin_statement_end"
+        },
+        {
+          "include": "#mixin_top_expr"
+        }
+      ]
+    },
+    "mixin_containers":{
+      "patterns": [
+        {
+          "include": "#mixin_string"
+        },
+        {
+          "begin": "\\(",
+          "beginCaptures": {"1": {"name": "support.paren.open.expr.ataribasic"}},
+          "end": "\\)",
+          "endCaptures": {"1": {"name": "support.paren.close.expr.ataribasic"}},
+          "patterns": [{"include": "#expr_paren_open"}]
+        }
+      ]
+    },
+    "mixin_operators": {
+      "patterns": [
+        {
+          "match": "\\,",
+          "name": "support.token.delimiter.list.ataribasic"
+        },
+        {
+          "match": "([-+*/^])",
+          "name": "keyword.operator.math.ataribasic"
+        },
+        {
+          "match": "(<>|[<>]=?|=|AND|NOT|OR)",
+          "name": "keyword.operator.logic.ataribasic"
+        }
+      ]
+    },
+    "mixin_statement_end":{
+      "patterns": [
+        {
+          "match": ":\\s*$",
+          "name": "syntax_error"
+        },
+        {
+          "match": ":|$",
+          "name": "support.token.delimiter.statement.ataribasic"
+        }
+      ]
+    },
+    "mixin_string" : {
+      "patterns": [
+        {
+          "begin": "\\\"",
+          "end": "\\\"",
+          "name": "punctuation.definition.string.open.ataribasic",
+          "push": "quoted_string"
+        }
+      ]
+    },
+    "mixin_top_expr":{
+      "patterns": [
+        {
+          "include": "#mixin_string"
+        },
+        {
+          "begin": "\\(",
+          "beginCaptures": {"1": {"name": "support.paren.open.expr.ataribasic"}},
+          "end": "\\)",
+          "endCaptures": {"1": {"name": "support.paren.close.expr.ataribasic"}},
+          "patterns": [{"include": "#expr_paren_open"}]
+        },
+        {
+          "match": "\\)",
+          "name": "syntax_error"
+        },
+        {
+          "include": "#mixin_operators"
+        },
+        {
+          "include": "#mixin_values"
+        }
+      ]
+    },
+    "mixin_values":{
+      "patterns": [
+        {
+          "match": "[a-z\\$\\%]",
+          "name": "syntax_error"
+        },
+        {
+          "begin": "CHR\\$",
+          "beginCaptures": {"1": {"name": "meta.function-call.chrS.ataribasic"}},
+          "end": ":|$",
+          "patterns": [{"include": "#required_args"}]
+        },
+        {
+          "begin": "STR\\$",
+          "beginCaptures": {"1": {"name": "meta.function-call.str.ataribasic"}},
+          "end": ":|$",
+          "patterns": [{"include": "#required_args"}]
+        },
+        {
+          "begin": "(FRE)|(USR)|(ABS)|(ADR)|(ASC)|(ATN)|(CLOG)|(COS)|(EXP)|(INT)|(LEN)|(LOG)|(PEEK)|(RND)|(SGN)|(SIN)|(SQR)|(VAL)|(PADDLE)|(PTRIG)|(STICK)|(STRIG)",
+          "beginCaptures": {
+            "2": {"name":"meta.function-call.usr.ataribasic"},
+            "3": {"name":"meta.function-call.abs.ataribasic"},
+            "1": {"name":"meta.function-call.fre.ataribasic"},
+            "4": {"name":"meta.function-call.adr.ataribasic"},
+            "5": {"name":"meta.function-call.asc.ataribasic"},
+            "6": {"name":"meta.function-call.atn.ataribasic"},
+            "7": {"name":"meta.function-call.clog.ataribasic"},
+            "8": {"name":"meta.function-call.cos.ataribasic"},
+            "9": {"name":"meta.function-call.exp.ataribasic"},
+            "10":{"name": "meta.function-call.int.ataribasic"},
+            "11":{"name": "meta.function-call.len.ataribasic"},
+            "12":{"name": "meta.function-call.log.ataribasic"},
+            "13":{"name": "meta.function-call.peek.ataribasic"},
+            "14":{"name": "meta.function-call.rnd.ataribasic"},
+            "15":{"name": "meta.function-call.sgn.ataribasic"},
+            "16":{"name": "meta.function-call.sin.ataribasic"},
+            "17":{"name": "meta.function-call.sqr.ataribasic"},
+            "18":{"name": "meta.function-call.val.ataribasic"},
+            "19":{"name": "meta.function-call.paddle.ataribasic"},
+            "20":{"name": "meta.function-call.ptrig.ataribasic"},
+            "21":{"name": "meta.function-call.stick.ataribasic"},
+            "22":{"name": "meta.function-call.strig.ataribasic"}
+          },
+          "end": "\\:|$",
+          "patterns": [{"include": "#required_args"}]
+        },
+        {
+          "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
+          "name": "constant.numeric.float.ataribasic"
+        },
+        {
+          "include": "#mixin_variable_name"
+        }
+      ]
+    },
+    "mixin_variable_name":{
+      "patterns": [
+        {
+          "begin": "[A-Z][A-Z0-9]*\\$",
+          "beginCaptures": {"1" : {"name": "variable.string.ataribasic"}},
+          "end": "",
+          "patterns": [{"include": "#var_eat_subscript"}]
+        },
+        {
+          "begin": "[A-Z][A-Z0-9]*",
+          "beginCaptures": {"1" : {"name": "variable.float.ataribasic"}},
+          "end": "",
+          "patterns": [{"include": "#var_eat_subscript"}]
+        }
+      ]
+    },
+    "required_args": {
+      "patterns": [
+        {
+          "begin": "\\(",
+          "beginCaptures": {"1": {"name": "support.paren.open.func.ataribasic"}},
+          "end": "\\)",
+          "endCaptures": {"1": {"name": "support.paren.close.func.ataribasic"}},
+          "patterns": [{"include": "#expr_paren_open"}]
+        },
+        {
+          "match": "",
+          "name": "syntax_error"
+        }
+      ]
+    },
+    "quoted_string":  {
+      "patterns": [
+        {
+          "match": "[^\"]*$",
+          "name": "syntax_error"
+        }
+      ]
+    },
+    "var_eat_subscript":{
+      "patterns": [
+        {
+          "begin": "\\(",
+          "beginCaptures": {"1": {"name": "support.paren.open.subscript.ataribasic"}},
+          "end": "\\)",
+          "endCaptures": {"1": {"name": "support.paren.close.subscript.ataribasic"}},
+          "patterns": [{"include": "#expr_paren_open"}]
         }
       ]
     }
