@@ -33,7 +33,7 @@
           "comment": "Existing whole line syntax error",
           "match": "([-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?))\\s*ERROR\\s*-.*",
           "name": "invalid.error.line.ataribasic",
-          "push": "syntax_error"
+          "push": "invalid.illegal"
         },
         {
           "comment": "A code line starting with a number. Float and scientific notation allowed",
@@ -107,16 +107,17 @@
           "end": "$",
           "match": "",
           "name": "invalid"
+        },
+        {
+          "begin": "(RU[N.])",
+          "beginCaptures": {"1": {"name": "keyword.run.ataribasic"}},
+          "end": "$",
+          "patterns": [{"include": "#expr_start_last"}]
         }
       ]
     },
     "code_line_todo_and_not_done": {
       "patterns": [
-        {
-          "match": "RU[N.]",
-          "scope": "keyword.run.ataribasic",
-          "push": "expr_start_last"
-        },
         {
           "match": "(\\?|PR(INT|(IN?)?.))\\s*(#)",
           "captures": {
@@ -322,7 +323,7 @@
         },
         {
           "match": "",
-          "name": "syntax_error"
+          "name": "invalid.illegal"
         }
       ]
     },
@@ -348,7 +349,7 @@
         },
         {
           "match": "",
-          "name": "syntax_error"
+          "name": "invalid.illegal"
         }
       ]
     },
@@ -366,7 +367,7 @@
         },
         {
           "match": "[^)]*(;:|$)",
-          "name": "syntax_error"
+          "name": "invalid.illegal"
         }
       ]
     },
@@ -378,6 +379,19 @@
         },
         {
           "include": "#mixin_top_expr"
+        }
+      ]
+    },
+    "expr_start_last": {
+      "patterns": [
+        {
+          "include": "#mixin_top_expr"
+        },
+        {
+          "begin": ":",
+          "beginCaptures": {"1":{"name": "support.token.delimiter.statement.ataribasic"}},
+          "end": "$",
+          "name": "invalid.illegal"
         }
       ]
     },
@@ -418,7 +432,7 @@
       "patterns": [
         {
           "match": ":\\s*$",
-          "name": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "match": ":|$",
@@ -454,7 +468,7 @@
         },
         {
           "match": "\\)",
-          "name": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "include": "#mixin_operators"
@@ -469,7 +483,7 @@
       "patterns": [
         {
           "match": "[a-z\\$\\%]",
-          "name": "syntax_error"
+          "name": "invalid.illegal"
         },
         {
           "begin": "CHR\\$",
@@ -548,7 +562,7 @@
         },
         {
           "match": "",
-          "name": "syntax_error"
+          "name": "invalid.illegal"
         }
       ]
     },
@@ -557,7 +571,7 @@
       "patterns": [
         {
           "match": "[^\"]*$",
-          "name": "syntax_error"
+          "name": "invalid.illegal"
         }
       ]
     },
