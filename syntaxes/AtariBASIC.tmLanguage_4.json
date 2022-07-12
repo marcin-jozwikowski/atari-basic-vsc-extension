@@ -15,6 +15,7 @@
     "main": {
       "patterns": [
         {
+          "comment": "Mark lines that are too long to import",
           "match": "^(.{254})(\\S.+?)\\s*$",
           "captures": {
             "1": {
@@ -29,6 +30,7 @@
           "match": "\\s+"
         },
         {
+          "comment": "Existing whole line syntax error",
           "match": "([-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?))\\s*ERROR\\s*-.*",
           "name": "invalid.error.line.ataribasic",
           "push": "syntax_error"
@@ -56,19 +58,22 @@
     "code_line": {
       "patterns": [
         {
+          "comment": "REM comment till the end of the line",
           "begin": "(REM|(RE?)?\\.)",
-          "end": "(:|$)",
+          "end": "$",
           "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic3"}},
           "name":"comment.line"
         },
         {
+          "comment": "DATA makes the rest of the line a delimited list of strings",
           "begin": "(D(ATA|(AT?)?\\.))\\s*",
           "beginCaptures": {"1": {"name": "keyword.data.ataribasic"}},
-          "end": "(:|$)",
+          "end": "$",
           "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic4"}},
           "patterns": [{"include": "#cmd_data"}]
         },
         {
+          "comment": "RESTORE [<nexpr>]",
           "begin": "(RES(TORE|(T(O(RE?)?)?)?\\.))",
           "beginCaptures": {"1":{ "name": "keyword.restore.ataribasic"}},
           "end": "(:|$)",
@@ -76,6 +81,7 @@
           "patterns": [{"include": "#expr_start"}]
         },
         {
+          "comment": "Commands taking no parameters",
           "match": "(CLR)|(CON[T.])|(DEG)|(POP)|(RAD)|(CLOAD)|(CS(AVE|(AV?)?\\.))",
           "captures": {
             "1": {"name": "keyword.clr.ataribasic"},
@@ -86,23 +92,26 @@
             "6": {"name": "keyword.cload.ataribasic"},
             "7": {"name": "keyword.csave.ataribasic"}
           }
+        },
+        {
+          "comment": "Commands with no parameters. These should always end the line",
+          "begin": "(B(YE|Y?\\.))|(DOS)|(END)|(NEW)|(STO[P.])|(RET(URN|(UR?)?\\.))",
+          "beginCaptures": {
+            "1": {"name": "keyword.bye.ataribasic"},
+            "3": {"name": "keyword.dos.ataribasic"},
+            "4": {"name": "keyword.end.ataribasic"},
+            "5": {"name": "keyword.new.ataribasic"},
+            "6": {"name": "keyword.stop.ataribasic"},
+            "7": {"name": "keyword.return.ataribasic"}
+          },
+          "end": "$",
+          "match": "",
+          "name": "invalid"
         }
       ]
     },
     "code_line_todo_and_not_done": {
       "patterns": [
-        {
-          "match": "(B(YE|Y?\\.))|(DOS)|(END)|(NEW)|(STO[P.])|(RET(URN|(UR?)?\\.))",
-          "captures": {
-            "1": "keyword.bye.ataribasic",
-            "3": "keyword.dos.ataribasic",
-            "4": "keyword.end.ataribasic",
-            "5": "keyword.new.ataribasic",
-            "6": "keyword.stop.ataribasic",
-            "7": "keyword.return.ataribasic"
-          },
-          "push": "line_and_statement_should_end"
-        },
         {
           "match": "RU[N.]",
           "scope": "keyword.run.ataribasic",
@@ -319,6 +328,7 @@
     },
 
     "cmd_data": {
+      "comment": "Data marks the rest of the line as data items: Simple literal strings delimited by commas",
       "patterns": [
         {
           "match": "([^,]+?)(\\s*$)?",
@@ -331,6 +341,7 @@
       ]
     },
     "cmd_done" : {
+      "comment": "A statement known to be completed is marked broken if any tokens follow before a new statement.",
       "patterns": [
         {
           "include": "#mixin_statement_end"
@@ -342,6 +353,7 @@
       ]
     },
     "expr_paren_open":{
+      "comment": "An expression already within at least one parenthesis.",
       "patterns": [
         {
           "include": "#mixin_containers"
@@ -359,6 +371,7 @@
       ]
     },
     "expr_start":{
+      "comment": "Start a top-level expression",
       "patterns": [
         {
           "include": "#mixin_statement_end"
@@ -369,6 +382,7 @@
       ]
     },
     "mixin_containers":{
+      "comment": "String group and expression group to be used inside parentheses only",
       "patterns": [
         {
           "include": "#mixin_string"
@@ -383,6 +397,7 @@
       ]
     },
     "mixin_operators": {
+      "comment": "Grab bag of operators for the dumb expression parser",
       "patterns": [
         {
           "match": "\\,",
@@ -399,6 +414,7 @@
       ]
     },
     "mixin_statement_end":{
+      "comment": "Mix-in to pop the context if the statement ends",
       "patterns": [
         {
           "match": ":\\s*$",
@@ -411,16 +427,20 @@
       ]
     },
     "mixin_string" : {
+      "comment": "A string opener that pushes quoted_string",
       "patterns": [
         {
           "begin": "\\\"",
+          "beginCaptures": {"1":{"name": "punctuation.definition.string.open.ataribasic"}},
           "end": "\\\"",
-          "name": "punctuation.definition.string.open.ataribasic",
-          "push": "quoted_string"
+          "endCaptures": {"1":{"name": "punctuation.definition.string.open.ataribasic"}},
+          "patterns": [{"include": "#quoted_string"}],
+          "name": "string.quoted.double"
         }
       ]
     },
     "mixin_top_expr":{
+      "comment": "For top-level expressions a closing parenthesis breaks the rest of the line",
       "patterns": [
         {
           "include": "#mixin_string"
@@ -445,6 +465,7 @@
       ]
     },
     "mixin_values":{
+      "comment": "Rules to match all known value types Always use last so the last reject rule here works",
       "patterns": [
         {
           "match": "[a-z\\$\\%]",
@@ -501,22 +522,22 @@
       ]
     },
     "mixin_variable_name":{
+      "comment": "Rules to match a variable name",
       "patterns": [
         {
-          "begin": "[A-Z][A-Z0-9]*\\$",
-          "beginCaptures": {"1" : {"name": "variable.string.ataribasic"}},
-          "end": "",
+          "match": "[A-Z][A-Z0-9]*\\$",
+          "captures": {"1" : {"name": "variable.string.ataribasic"}},
           "patterns": [{"include": "#var_eat_subscript"}]
         },
         {
-          "begin": "[A-Z][A-Z0-9]*",
-          "beginCaptures": {"1" : {"name": "variable.float.ataribasic"}},
-          "end": "",
+          "match": "[A-Z][A-Z0-9]*",
+          "captures": {"1" : {"name": "variable.float.ataribasic"}},
           "patterns": [{"include": "#var_eat_subscript"}]
         }
       ]
     },
     "required_args": {
+      "comment": "Function requires parentheses or the line breaks",
       "patterns": [
         {
           "begin": "\\(",
@@ -532,6 +553,7 @@
       ]
     },
     "quoted_string":  {
+      "comment": "On Atari there's no escaping a string. Strings may legally be quite long, with escape characters in them, etc., by hacking the BASIC language.",
       "patterns": [
         {
           "match": "[^\"]*$",
