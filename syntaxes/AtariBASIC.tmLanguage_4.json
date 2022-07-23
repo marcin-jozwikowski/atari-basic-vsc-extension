@@ -5,7 +5,7 @@
   "information_for_contributors": [
     "This file is a modified version of https://github.com/thinkyhead/6502-Tools/blob/master/Sublime/AtariTools/AtariBASIC.sublime-syntax"
   ],
-  "first_line_match": "\\d+ (\\?|BYE|C(OLOR|L(OSE|OAD|R)|OM|ONT|SAVE)|D(ATA|IM|OS|RAWTO)|EN(TER|D)|FOR|G(ET|O(SUB|TO)|RAPHICS)|IF|INPUT|L(ET|IST|OAD|OCATE|PRINT)|NE(W|XT)|NOTE|ON|OPEN|P(LOT|O(INT|KE|P|SITION)|RINT|UT)|RE(AD|M|STORE|TURN)|RUN|S(AVE|ETCOLOR|OUND|TATUS|TOP)|TRAP)([ :]|$)",
+  "first_line_match": "(\\d\\s)?(\\?|BYE|C(OLOR|L(OSE|OAD|R)|OM|ONT|SAVE)|D(ATA|IM|OS|RAWTO)|EN(TER|D)|FOR|G(ET|O(SUB|TO)|RAPHICS)|IF|INPUT|L(ET|IST|OAD|OCATE|PRINT)|NE(W|XT)|NOTE|ON|OPEN|P(LOT|O(INT|KE|P|SITION)|RINT|UT)|RE(AD|M|STORE|TURN)|RUN|S(AVE|ETCOLOR|OUND|TATUS|TOP)|TRAP)([ :]|$)",
   "patterns": [
     {
       "include": "#main"
@@ -109,33 +109,44 @@
           "name": "invalid"
         },
         {
+          "comment": "RUN [<string>]",
           "begin": "(RU[N.])",
           "beginCaptures": {"1": {"name": "keyword.run.ataribasic"}},
           "end": "$",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic6"}},
           "patterns": [{"include": "#expr_start_last"}]
+        },
+        {
+          "comment": "PRINT #<nexpr>[,;<expr-list>]",
+          "begin": "(\\?|PR(INT|(IN?)?.))[ ]*(#)",
+          "beginCaptures": {
+            "1": {"name": "keyword.print.ataribasic"},
+            "4": {"name": "support.token.iocb.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#cmd_print_dev"}]
+        },
+        {
+          "comment": "PRINT <expr-list>",
+          "begin": "\\?|PR(INT|(IN?)?\\.)",
+          "beginCaptures": {"0": {"name": "keyword.print.ataribasic"}},
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#cmd_print"}]
+        },
+        {
+          "comment": "LPRINT <expr-list>",
+          "begin": "LP(RINT|(R(IN?)?)?\\.)",
+          "beginCaptures": {"0": {"name": "keyword.lprint.ataribasic"}},
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#cmd_print"}]
         }
       ]
     },
     "code_line_todo_and_not_done": {
       "patterns": [
-        {
-          "match": "(\\?|PR(INT|(IN?)?.))\\s*(#)",
-          "captures": {
-            "1": "keyword.print.ataribasic",
-            "4": "support.token.iocb.ataribasic"
-          },
-          "push": "cmd_print_dev"
-        },
-        {
-          "match": "\\?|PR(INT|(IN?)?\\.)",
-          "scope": "keyword.print.ataribasic",
-          "push": "cmd_print"
-        },
-        {
-          "match": "LP(RINT|(R(IN?)?)?\\.)",
-          "scope": "keyword.lprint.ataribasic",
-          "push": "cmd_print"
-        },
         {
           "match": "(I(NPUT|(N(PU?)?)?\\.))\\s*(#)",
           "captures": {
@@ -353,6 +364,77 @@
         }
       ]
     },
+    "cmd_print": {
+      "comment": "PRINT - Expressions separated by commas and semicolons Currently not very smart. Expression evaluation will make it smarter",
+      "patterns": [
+        {
+          "match": ";",
+          "name": "support.token.delimiter.concat.ataribasic"
+        },
+        {
+          "match": "\\,",
+          "name": "support.token.delimiter.tab.ataribasic"
+        },
+        {
+          "include": "#real_expr"
+        }
+      ]
+    },
+    "cmd_print_dev":{
+      "comment": "PRINT #n - Mark the device id, if present. Always just go to cmd_print, even if missing so the expression can be tested",
+      "patterns": [
+        {
+          "match": "(\\d+)",
+          "captures": {
+            "1": {"name": "constant.numeric.device-id.ataribasic"}
+          }
+        },
+        {
+          "include": "#cmd_print"
+        }
+      ]
+    },
+    "expr_2nd_modifier":{
+      "patterns": [
+        {
+          "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
+          "name": "constant.numeric.float.ataribasic"
+        },
+        {
+          "include": "#expr_wants_operator"
+        },
+        {
+          "match": "NOT|[-+]",
+          "name": "invalid.illegal"
+        },
+        {
+          "match": "",
+          "patterns": [{"include": "#expr_wants_value"}]
+        }
+      ]
+    },
+    "expr_eat_modifier":{
+      "comment": "Tag a modifier",
+      "patterns": [
+        {
+          "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
+          "name": "constant.numeric.float.ataribasic",
+          "patterns": [{"include": "#expr_wants_operator"}]
+        },
+        {
+          "match": "(NOT)|(-)|(\\+)",
+          "captures": {
+            "1": {"name": "keyword.operator.logic.ataribasic"},
+            "2": {"name": "keyword.operator.negative.ataribasic"},
+            "3": {"name": "keyword.operator.positive.ataribasic"}
+          },
+          "patterns": [{"include": "#expr_2nd_modifier"}]
+        },
+        {
+          "include": "#expr_wants_value"
+        }
+      ]
+    },
     "expr_paren_open":{
       "comment": "An expression already within at least one parenthesis.",
       "patterns": [
@@ -395,6 +477,179 @@
         }
       ]
     },
+    "expr_till_close": {
+      "comment": "An enclosed expression. Comma delimited. No items limit.",
+      "patterns": [
+        {
+          "match": "[^)]*(;:|$)",
+          "name": "invalid.illegal"
+        },
+        {
+          "include": "#mixin_statement_end"
+        },
+        {
+          "include": "#expr_wants_operator"
+        },
+        {
+          "match": "\\,",
+          "scope": "support.token.delimiter.subscripts.ataribasic"
+        },
+        {
+          "include": "#expr_eat_modifier"
+        }
+      ]
+    },
+    "expr_wants_operator":{
+      "comment": "Expression wants an operator If one is not found the expression is done, so pop",
+      "name": "expr_wants_operator",
+      "patterns": [
+        {
+          "match": "((<>|[<>]=|[-+*/^<=>]|AND|OR)\\s*(:|$))",
+          "name": "invalid.illegal"
+        },
+        {
+          "match": "[-+*/^]",
+          "name": "keyword.operator.math.ataribasic",
+          "include": "#expr_eat_modifier"
+        },
+        {
+          "match": "<>|[<>]=?|=|AND|OR",
+          "name": "keyword.operator.logic.ataribasic",
+          "include": "#expr_eat_modifier"
+        },
+        {
+          "match": "(THEN)\\s*[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
+          "captures": {
+            "1": {"name": "keyword.then.ataribasic"},
+            "2": {"name": "constant.numeric.line-number.ataribasic"}
+          },
+          "include--": "#line_and_statement_should_end"
+        },
+        {
+          "match": "THEN",
+          "name": "keyword.then.ataribasic",
+          "include": "#code_line"
+        },
+        {
+          "match": "(GOTO)|(GOSUB)",
+          "captures": {
+            "1": {"name":"keyword.goto.ataribasic"},
+            "2": {"name":"keyword.gosub.ataribasic"}
+          }
+        },
+        {
+          "match": "[A-Z][A-Z0-9]*|[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)|\\(",
+          "name": "invalid.illegal"
+        }
+      ]
+    },
+    "expr_wants_value":{
+      "comment": "Expression wants a value",
+      "patterns": [
+        {
+          "begin": "(CHR\\$)\\(",
+          "beginCaptures": {"1": {"name": "meta.function-call.chrS.ataribasic"}},
+          "end": "\\)|:|$",
+          "patterns": [
+            {"include": "#expr_wants_operator"},
+            {"include": "#required_args"}
+          ]
+        },
+        {
+          "begin": "(STR\\$)\\(",
+          "beginCaptures": {"1": {"name": "meta.function-call.str.ataribasic"}},
+          "end": "\\)|:|$",
+          "patterns": [
+            {"include": "#expr_wants_operator"},
+            {"include": "#required_args"}
+          ]
+        },
+        {
+          "begin": "(FRE)|(USR)|(ABS)|(ADR)|(ASC)|(ATN)|(CLOG)|(COS)|(EXP)|(INT)|(LEN)|(LOG)|(PEEK)|(RND)|(SGN)|(SIN)|(SQR)|(VAL)|(PADDLE)|(PTRIG)|(STICK)|(STRIG)",
+          "beginCaptures": {
+            "1": {"name": "meta.function-call.fre.ataribasic"},
+            "2": {"name": "meta.function-call.usr.ataribasic"},
+            "3": {"name": "meta.function-call.abs.ataribasic"},
+            "4": {"name": "meta.function-call.adr.ataribasic"},
+            "5": {"name": "meta.function-call.asc.ataribasic"},
+            "6": {"name": "meta.function-call.atn.ataribasic"},
+            "7": {"name": "meta.function-call.clog.ataribasic"},
+            "8": {"name": "meta.function-call.cos.ataribasic"},
+            "9": {"name": "meta.function-call.exp.ataribasic"},
+            "10": {"name": "meta.function-call.int.ataribasic"},
+            "11": {"name": "meta.function-call.len.ataribasic"},
+            "12": {"name": "meta.function-call.log.ataribasic"},
+            "13": {"name": "meta.function-call.peek.ataribasic"},
+            "14": {"name": "meta.function-call.rnd.ataribasic"},
+            "15": {"name": "meta.function-call.sgn.ataribasic"},
+            "16": {"name": "meta.function-call.sin.ataribasic"},
+            "17": {"name": "meta.function-call.sqr.ataribasic"},
+            "18": {"name": "meta.function-call.val.ataribasic"},
+            "19": {"name": "meta.function-call.paddle.ataribasic"},
+            "20": {"name": "meta.function-call.ptrig.ataribasic"},
+            "21": {"name": "meta.function-call.stick.ataribasic"},
+            "22": {"name": "meta.function-call.strig.ataribasic"}
+          },
+          "end": ":|$",
+          "patterns": [
+            {"include": "#expr_wants_operator"},
+            {"include": "#required_args"}
+          ]
+        },
+        {
+          "begin": "\\\"",
+          "beginCaptures": {"1":{"name": "punctuation.definition.string.open.ataribasic"}},
+          "end": "\\\"",
+          "endCaptures": {"1":{"name": "punctuation.definition.string.open.ataribasic"}},
+          "patterns": [{"include": "#quoted_string"}],
+          "name": "string.quoted.double"
+        },
+        {
+          "begin": "\\(",
+          "end": "(\\)|:|$)",
+          "beginCaptures": {"1": {"name": "support.paren.open.ataribasic"}},
+          "patterns": [{"include": "#expr_till_close"}]
+        },
+        {
+          "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
+          "name": "constant.numeric.float.ataribasic-3",
+          "patterns": [{"include": "#expr_wants_operator"}]
+        },
+        {
+          "match": "THEN|GOTO|GOSUB",
+          "name": "invalid.error.reserved-word.ataribasic",
+          "patterns": [{"include": "#syntax_error"}]
+        },
+        {
+          "match": "[A-Z][A-Z0-9]*\\$",
+          "name": "variable.string.ataribasic",
+          "patterns": [{"include": "#expr_eat_subscript"}]
+        },
+        {
+          "match": "[A-Z][A-Z0-9]*",
+          "name": "variable.float.ataribasic",
+          "patterns": [{"include": "#expr_eat_subscript"}]
+        },
+        {
+          "match-wrong": "",
+          "patterns": [{"include": "#syntax_error"}]
+        }
+      ]
+    },
+    "line_and_statement_should_end" :{
+      "comment": "A statement might also want to end the line",
+      "patterns": [
+        {
+          "begin": ":",
+          "end": "$",
+          "name": "support.token.delimiter.statement.ataribasic-2"
+        },
+        {
+          "match": "",
+          "name": "invalid.illegal"
+        }
+      ]
+    },
     "mixin_containers":{
       "comment": "String group and expression group to be used inside parentheses only",
       "patterns": [
@@ -433,10 +688,6 @@
         {
           "match": ":\\s*$",
           "name": "invalid.illegal"
-        },
-        {
-          "match": ":|$",
-          "name": "support.token.delimiter.statement.ataribasic"
         }
       ]
     },
@@ -550,14 +801,26 @@
         }
       ]
     },
+    "real_expr":{
+      "comment": "real_expr Wants a proper expression or it throws syntax error So we start an expression, first we want a modifier or a value. If we don't find either of those then the expression is moot. However, if we do find them, then we must mark them here also, and change the context so that an operator is next required. (Later it will be possible to tell whether strings in a float context are converting to float).",
+      "patterns": [
+        {
+          "include": "#mixin_statement_end"
+        },
+        {
+          "include": "#expr_eat_modifier"
+        }
+      ]
+    },
     "required_args": {
       "comment": "Function requires parentheses or the line breaks",
       "patterns": [
         {
           "begin": "\\(",
           "beginCaptures": {"1": {"name": "support.paren.open.func.ataribasic"}},
-          "end": "\\)",
+          "end": "\\)|:|$",
           "endCaptures": {"1": {"name": "support.paren.close.func.ataribasic"}},
+          "name": "required_args-2",
           "patterns": [{"include": "#expr_paren_open"}]
         },
         {
