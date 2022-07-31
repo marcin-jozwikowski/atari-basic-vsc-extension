@@ -142,50 +142,62 @@
           "end": "(:|$)",
           "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_print"}]
+        },
+        {
+          "begin": "(I(NPUT|(N(PU?)?)?\\.))\\s*(#)",
+          "beginCaptures": {
+            "1": {"name": "keyword.input.ataribasic"},
+            "5": {"name": "support.token.iocb.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#expr_device"}]
+        },
+        {
+          "begin": "I(NPUT|(N(PU?)?)?\\.)",
+          "beginCaptures": {
+            "0": {"name": "keyword.input.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#expr_start"}]
+        },
+        {
+          "begin": "(CL(OSE|(OS?)?\\.))\\s*(#)",
+          "beginCaptures": {
+            "1": {"name": "keyword.close.ataribasic"},
+            "4": {"name": "support.token.iocb.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#expr_device"}]
+        },
+        {
+          "begin": "(O(PEN|(PE?)?\\.))\\s*(#)",
+          "beginCaptures": {
+            "1": {"name": "keyword.open.ataribasic"},
+            "4": {"name": "support.token.iocb.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#expr_device"}]
+        },
+        {
+          "begin": "((GET)|(NO(TE|T?\\.))|(ST(ATUS|(A(TU?)?)?\\.)))\\s*(#)",
+          "beginCaptures": {
+            "2": {"name": "keyword.get.ataribasic"},
+            "3": {"name": "keyword.note.ataribasic"},
+            "5": {"name": "keyword.status.ataribasic"},
+            "9": {"name": "support.token.iocb.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#expr_device"}]
         }
       ]
     },
     "code_line_todo_and_not_done": {
       "patterns": [
-        {
-          "match": "(I(NPUT|(N(PU?)?)?\\.))\\s*(#)",
-          "captures": {
-            "1": "keyword.input.ataribasic",
-            "5": "support.token.iocb.ataribasic"
-          },
-          "push": "expr_device"
-        },
-        {
-          "match": "I(NPUT|(N(PU?)?)?\\.)",
-          "scope": "keyword.input.ataribasic",
-          "push": "expr_start"
-        },
-        {
-          "match": "(CL(OSE|(OS?)?\\.))\\s*(#)",
-          "captures": {
-            "1": "keyword.close.ataribasic",
-            "4": "support.token.iocb.ataribasic"
-          },
-          "push": "expr_device"
-        },
-        {
-          "match": "(O(PEN|(PE?)?\\.))\\s*(#)",
-          "captures": {
-            "1": "keyword.open.ataribasic",
-            "4": "support.token.iocb.ataribasic"
-          },
-          "push": "expr_device"
-        },
-        {
-          "match": "((GET)|(NO(TE|T?\\.))|(ST(ATUS|(A(TU?)?)?\\.)))\\s*(#)",
-          "captures": {
-            "2": "keyword.get.ataribasic",
-            "3": "keyword.note.ataribasic",
-            "5": "keyword.status.ataribasic",
-            "9": "support.token.iocb.ataribasic"
-          },
-          "push": "expr_device"
-        },
         {
           "match": "XIO\\b",
           "scope": "keyword.xio.ataribasic",
@@ -410,6 +422,19 @@
         {
           "match": "",
           "patterns": [{"include": "#expr_wants_value"}]
+        }
+      ]
+    },
+    "expr_device": {
+      "patterns": [
+        {
+          "match": "(\\d+)",
+          "captures": {
+            "1": {"name": "constant.numeric.device-id.ataribasic"}
+          }
+        },
+        {
+          "include": "#expr_start"
         }
       ]
     },
