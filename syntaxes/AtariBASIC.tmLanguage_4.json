@@ -416,6 +416,26 @@
           "end": "(:|$)",
           "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_let"}]
+        },
+        {
+          "begin": "([A-Z][A-Z0-9]*)\\s?(=)\\s?",
+          "beginCaptures": {
+            "1": {"name": "variable.float.ataribasic"},
+            "2": {"name": "keyword.operator.assignment.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#expr_wants_value"}]
+        },
+        {
+          "begin": "([A-Z][A-Z0-9]*\\$)\\s?(=)\\s?",
+          "beginCaptures": {
+            "1": {"name": "variable.float.ataribasic"},
+            "2": {"name": "keyword.operator.assignment.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#expr_wants_value"}]
         }
       ]
     },
@@ -532,12 +552,10 @@
     "cmd_let_equals": {
       "patterns": [
         {
-          "begin": "(\\s*)(=)(\\s*)",
-          "beginCaptures": {"2" :{"name":"keyword.operator.assignment.ataribasic"}},
-          "end": "(:|$)",
-          "endCaptures": {"1": {"name": "support.paren.close.expr.ataribasic"}},
-          "patterns": [{"include":"#expr_wants_value"}]
+          "match": "(\\s*)(=)(\\s*)",
+          "captures": {"2" :{"name":"keyword.operator.assignment.ataribasic"}}
         },
+        {"include":"#expr_wants_value"},
         {
           "match": "",
           "name": "invalid.illegal"
