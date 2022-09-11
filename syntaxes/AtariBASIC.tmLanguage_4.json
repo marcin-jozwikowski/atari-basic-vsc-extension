@@ -423,6 +423,7 @@
           "patterns": [{"include": "#cmd_let"}]
         },
         {
+          "comment": "Variable declaration",
           "begin": "([A-Z][A-Z0-9]*\\$)",
           "beginCaptures": {
             "0": {"name": "variable.float.ataribasic"}
@@ -432,6 +433,7 @@
           "patterns": [{"include": "#cmd_let"}]
         },
         {
+          "comment": "Variable declaration",
           "begin": "([A-Z][A-Z0-9]*)",
           "beginCaptures": {
             "0": {"name": "variable.float.ataribasic"}
@@ -542,23 +544,19 @@
     },
     "cmd_let": {
       "patterns": [
+        
         {
-          "begin": "\\(",
-          "beginCaptures": {"0": {"name": "support.paren.open.expr.ataribasic"}},
-          "end": "\\)",
-          "endCaptures": {"0": {"name": "support.paren.close.expr.ataribasic"}},
-          "patterns": [{"include": "#expr_paren_open"}]
+          "match": "[A-Z][A-Z0-9]*\\$*",
+          "name": "variable.string.ataribasic",
+          "patterns": [{"include": "#expr_eat_subscript"}]
         },
-        {"include": "#cmd_let_equals"}
-      ]
-    },
-    "cmd_let_equals": {
-      "patterns": [
         {
           "match": "(\\s*)(=)(\\s*)",
           "captures": {"2" :{"name":"keyword.operator.assignment.ataribasic"}}
         },
-        {"include":"#expr_wants_value"},
+        {
+          "include":"#expr_wants_value"
+        },
         {
           "match": "",
           "name": "invalid.illegal"
