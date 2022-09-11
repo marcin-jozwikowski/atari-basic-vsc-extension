@@ -373,14 +373,20 @@
           "beginCaptures": {"0": {"name": "keyword.goto.ataribasic"}},
           "end": "(:|$)",
           "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
-          "patterns": [{"include": "#expr_start_last"}]
+          "patterns": [
+            {"include": "#line_number"}, 
+            {"include": "#expr_start_last"}
+          ]
         }, 
         {
           "begin": "GOS(UB|U?\\.)",
           "beginCaptures": {"0": {"name": "keyword.gosub.ataribasic"}},
           "end": "(:|$)",
           "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
-          "patterns": [{"include": "#one_expr"}]
+          "patterns": [
+            {"include": "#line_number"}, 
+            {"include": "#one_expr"}
+          ]
         },
         {
           "begin": "ON",
@@ -571,13 +577,17 @@
     "cmd_on": {
       "patterns": [
         {
-          "match": "GOTO",
-          "name": "keyword.on-goto.ataribasic",
+          "begin": "GOTO",
+          "beginCaptures": {"0": {"name": "keyword.on-goto.ataribasic"}},
+          "end": "(:|$)",
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#on_line_list"}]
         },
         {
-          "match": "GOSUB",
-          "name": "keyword.on-gosub.ataribasic",
+          "begin": "GOSUB",
+          "beginCaptures": {"0": {"name": "keyword.on-gosub.ataribasic"}},
+          "end": "(:|$)",
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#on_line_list"}]
         },
         {
@@ -915,6 +925,10 @@
           "include": "#real_expr"
         }
       ]
+    },
+    "line_number": {
+      "match": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
+      "name": "keyword.control.line-number.ataribasic"
     },
     "line_and_statement_should_end" :{
       "comment": "A statement might also want to end the line",
