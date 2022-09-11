@@ -1189,7 +1189,7 @@
         {
           "begin": "\\(",
           "beginCaptures": {"0": {"name": "support.paren.open.func.ataribasic"}},
-          "end": "\\)",
+          "end": "\\)|:|$",
           "endCaptures": {"0": {"name": "support.paren.close.func.ataribasic"}},
           "patterns": [{"include": "#expr_paren_open"}]
         },
