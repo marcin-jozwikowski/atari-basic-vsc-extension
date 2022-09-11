@@ -382,16 +382,18 @@
           "end": "(:|$)",
           "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#one_expr"}]
+        },
+        {
+          "begin": "ON",
+          "beginCaptures": {"0": {"name": "keyword.on.ataribasic"}},
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#cmd_on"}]
         }
       ]
     },
     "code_line_todo_and_not_done": {
       "patterns": [
-        {
-          "match": "ON",
-          "scope": "keyword.on.ataribasic",
-          "push": "cmd_on"
-        },
         {
           "match": "IF",
           "scope": "keyword.if.ataribasic",
@@ -506,6 +508,23 @@
         }
       ]
     },
+    "cmd_on": {
+      "patterns": [
+        {
+          "match": "GOTO",
+          "name": "keyword.on-goto.ataribasic",
+          "patterns": [{"include": "#on_line_list"}]
+        },
+        {
+          "match": "GOSUB",
+          "name": "keyword.on-gosub.ataribasic",
+          "patterns": [{"include": "#on_line_list"}]
+        },
+        {
+          "include": "#mixin_some_exprs"
+        }
+      ]
+    },
     "cmd_print": {
       "comment": "PRINT - Expressions separated by commas and semicolons Currently not very smart. Expression evaluation will make it smarter",
       "patterns": [
@@ -550,7 +569,7 @@
         },
         {
           "match": "",
-          "set": "syntax_error"
+          "set": "invalid.illegal"
         }
       ]
     },
@@ -804,7 +823,7 @@
         {
           "match": "THEN|GOTO|GOSUB",
           "name": "invalid.error.reserved-word.ataribasic",
-          "patterns": [{"include": "#syntax_error"}]
+          "patterns": [{"include": "#invalid.illegal"}]
         },
         {
           "match": "[A-Z][A-Z0-9]*\\$",
@@ -818,7 +837,7 @@
         },
         {
           "match-wrong": "",
-          "patterns": [{"include": "#syntax_error"}]
+          "patterns": [{"include": "#invalid.illegal"}]
         }
       ]
     },
@@ -879,6 +898,38 @@
         {
           "match": "(<>|[<>]=?|=|AND|NOT|OR)",
           "name": "keyword.operator.logic.ataribasic"
+        }
+      ]
+    },
+    "mixin_some_exprs": {
+      "patterns": [
+        {
+          "include": "#mixin_statement_end"
+        },
+        {
+          "include": "#mixin_string"
+        },
+        {
+          "match": "(<>|[<>]=?|=|AND|NOT|OR)",
+          "name": "keyword.operator.logic.ataribasic"
+        },
+        {
+          "include": "#mixin_values"
+        },
+        {
+          "begin": "\\(",
+          "beginCaptures": {"1": {"name": "support.paren.open.expr.ataribasic"}},
+          "end": "\\)",
+          "endCaptures": {"1": {"name": "support.paren.close.expr.ataribasic"}},
+          "patterns": [{"include": "#expr_paren_open"}]
+        },
+        {
+          "match": "[:$]",
+          "name": "invalid.illegal"
+        },
+        {
+          "match": "([-+*/^])",
+          "name": "keyword.operator.math.ataribasic"
         }
       ]
     },
@@ -998,6 +1049,24 @@
           "match": "[A-Z][A-Z0-9]*",
           "captures": {"1" : {"name": "variable.float.ataribasic"}},
           "patterns": [{"include": "#var_eat_subscript"}]
+        }
+      ]
+    },
+    "on_line_list": {
+      "patterns": [
+        {
+          "include": "#mixin_statement_end"
+        },
+        {
+          "match": "([-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)|[A-Z][A-Z0-9]*)\\s*(\\,)?",
+          "captures": {
+            "1": {"name": "constant.numeric.line-number.ataribasic"},
+            "2": {"name": "support.token.delimiter.list.ataribasic"}
+          }
+        },
+        {
+          "match": "[^\\d]",
+          "name": "invalid.illegal"
         }
       ]
     },
