@@ -389,16 +389,18 @@
           "end": "(:|$)",
           "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_on"}]
+        },
+        {
+          "begin": "IF",
+          "beginCaptures": {"0": {"name": "keyword.if.ataribasic"}},
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#cmd_if"}]
         }
       ]
     },
     "code_line_todo_and_not_done": {
       "patterns": [
-        {
-          "match": "IF",
-          "scope": "keyword.if.ataribasic",
-          "push": "cmd_if"
-        },
         {
           "match": "(LET)?\\s*([A-Z][A-Z0-9]*\\$)",
           "captures": {
@@ -496,6 +498,27 @@
         },
         {
           "include": "#expr_start"
+        }
+      ]
+    },
+    "cmd_if": { 
+      "patterns": [
+        {
+          "match": "\\s*(THEN)\\s*([-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?))",
+          "captures": {
+            "1": {"name": "keyword.then.ataribasic"},
+            "2": {"name": "constant.numeric.line-number.ataribasic"}
+          },
+          "patterns": [{"include": "#line_and_statement_should_end"}]
+        },
+        {
+          "begin": "\\s*(THEN)\\s*",
+          "beginCaptures": {
+            "1": {"name": "keyword.then.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#code_line"}]
         }
       ]
     },
