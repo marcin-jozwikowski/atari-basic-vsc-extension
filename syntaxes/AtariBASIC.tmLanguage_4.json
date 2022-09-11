@@ -249,36 +249,56 @@
           "end": "(:|$)",
           "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_next"}]
+        },
+        {
+          "begin": "T(RAP|(RA?)?\\.)",
+          "beginCaptures": {
+            "0":{"name": "keyword.trap.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#one_expr"}]
+        },
+        {
+          "begin": "POK[E.]",
+          "beginCaptures": {
+            "0":{"name": "keyword.poke.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#two_exprs"}]
+        },
+        {
+          "begin": "C(OLOR|(O(LO?)?)?\\.)",
+          "beginCaptures": {
+            "0":{"name": "keyword.color.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#one_expr"}]
+        },
+        {
+          "begin": "DR(AWTO|(A(WT?)?)?\\.)",
+          "beginCaptures": {
+            "0":{"name": "keyword.drawto.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#two_exprs"}]
+        },
+        {
+          "begin": "GR(APHICS|(A(P(H(IC?)?)?)?)?\\.)",
+          "beginCaptures": {
+            "0":{"name": "keyword.graphics.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#one_expr"}]
         }
       ]
     },
     "code_line_todo_and_not_done": {
       "patterns": [
-        {
-          "match": "T(RAP|(RA?)?\\.)",
-          "scope": "keyword.trap.ataribasic",
-          "push": "one_expr"
-        },
-        {
-          "match": "POK[E.]",
-          "scope": "keyword.poke.ataribasic",
-          "push": "two_exprs"
-        },
-        {
-          "match": "C(OLOR|(O(LO?)?)?\\.)",
-          "scope": "keyword.color.ataribasic",
-          "push": "one_expr"
-        },
-        {
-          "match": "DR(AWTO|(A(WT?)?)?\\.)",
-          "scope": "keyword.drawto.ataribasic",
-          "push": "two_exprs"
-        },
-        {
-          "match": "GR(APHICS|(A(P(H(IC?)?)?)?)?\\.)",
-          "scope": "keyword.graphics.ataribasic",
-          "push": "one_expr"
-        },
         {
           "match": "LOC(ATE|(AT?)?\\.)",
           "scope": "keyword.locate.ataribasic",
@@ -935,6 +955,25 @@
           "match": "[A-Z][A-Z0-9]*",
           "captures": {"1" : {"name": "variable.float.ataribasic"}},
           "patterns": [{"include": "#var_eat_subscript"}]
+        }
+      ]
+    },
+    "one_expr": {
+      "patterns": [
+        {"include": "#real_expr"}
+      ]
+    },
+    "two_exprs": {
+      "patterns": [
+        {
+          "match": "\\s*(,)",
+          "captures": {
+            "1": {"name": "support.token.delimiter.list.1.ataribasic"}
+          },
+          "patterns": [{"include": "#one_expr"}]
+        },
+        {
+          "include": "#real_expr"
         }
       ]
     },
