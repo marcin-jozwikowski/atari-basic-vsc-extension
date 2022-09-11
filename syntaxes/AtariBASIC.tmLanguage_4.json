@@ -222,16 +222,20 @@
           "end": "(:|$)",
           "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_device"}]
+        },
+        {
+          "begin": "DIM|COM",
+          "beginCaptures": {
+            "0":{"name": "keyword.dim.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#cmd_dim_list"}]
         }
       ]
     },
     "code_line_todo_and_not_done": {
       "patterns": [
-        {
-          "match": "DIM|COM",
-          "scope": "keyword.dim.ataribasic",
-          "push": "cmd_dim_list"
-        },
         {
           "match": "F(OR|O?\\.)",
           "scope": "keyword.for.ataribasic",
@@ -369,6 +373,39 @@
         {
           "match": "\\,",
           "name": "support.token.delimiter.data.ataribasic6"
+        }
+      ]
+    },    
+    "cmd_dim_list": {
+      "name": "ctx.cmd_dim_list.ataribasic",
+      "patterns": [
+        {
+          "include": "#mixin_statement_end"
+        },
+        {
+          "match": "\\,",
+          "name": "punctuation.definition.delimiter.list.ataribasic"
+        },
+        {
+          "match": "[A-Z][A-Z0-9]*\\$",
+          "name": "variable.string.ataribasic",
+          "patterns": [{"include": "#cmd_dim_subscript"}]
+        },
+        {
+          "match": "[A-Z][A-Z0-9]*",
+          "name": "variable.float.ataribasic",
+          "patterns": [{"include": "#cmd_dim_subscript"}]
+        }
+      ]
+    },
+    "cmd_dim_subscript": {
+      "patterns": [
+        {
+          "begin": "\\(",
+          "beginCaptures": {"1": {"name": "support.paren.open.expr.ataribasic"}},
+          "end": "\\)",
+          "endCaptures": {"1": {"name": "support.paren.close.expr.ataribasic"}},
+          "patterns": [{"include": "#expr_paren_open"}]
         }
       ]
     },
