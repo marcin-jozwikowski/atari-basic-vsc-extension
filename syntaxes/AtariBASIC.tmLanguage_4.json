@@ -202,32 +202,31 @@
           "end": "(:|$)",
           "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_xio"}]
+        },
+        {
+          "begin": "(PUT)\\s*(#)",
+          "beginCaptures": {
+            "1": {"name": "keyword.get.ataribasic"},
+            "2": {"name": "support.token.iocb.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#expr_device"}]
+        },
+        {
+          "begin": "(P(OINT|(O(IN?)?)?\\.))\\s*(#)",
+          "beginCaptures": {
+            "1": {"name": "keyword.get.ataribasic"},
+            "5": {"name": "support.token.iocb.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#expr_device"}]
         }
       ]
     },
     "code_line_todo_and_not_done": {
       "patterns": [
-        {
-          "match": "XIO\\b",
-          "scope": "keyword.xio.ataribasic",
-          "push": "cmd_xio"
-        },
-        {
-          "match": "(PUT)\\s*(#)",
-          "captures": {
-            "1": "keyword.get.ataribasic",
-            "2": "support.token.iocb.ataribasic"
-          },
-          "push": "expr_device"
-        },
-        {
-          "match": "(P(OINT|(O(IN?)?)?\\.))\\s*(#)",
-          "captures": {
-            "1": "keyword.get.ataribasic",
-            "5": "support.token.iocb.ataribasic"
-          },
-          "push": "expr_device"
-        },
         {
           "match": "DIM|COM",
           "scope": "keyword.dim.ataribasic",
