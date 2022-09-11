@@ -231,21 +231,29 @@
           "end": "(:|$)",
           "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_dim_list"}]
+        },
+        {
+          "begin": "F(OR|O?\\.)",
+          "beginCaptures": {
+            "0":{"name": "keyword.for.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#cmd_for"}]
+        },
+        {
+          "begin": "N(EXT|(EX?)?\\.)",
+          "beginCaptures": {
+            "0":{"name": "keyword.next.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#cmd_next"}]
         }
       ]
     },
     "code_line_todo_and_not_done": {
       "patterns": [
-        {
-          "match": "F(OR|O?\\.)",
-          "scope": "keyword.for.ataribasic",
-          "push": "cmd_for"
-        },
-        {
-          "match": "N(EXT|(EX?)?\\.)",
-          "scope": "keyword.next.ataribasic",
-          "push": "cmd_next"
-        },
         {
           "match": "T(RAP|(RA?)?\\.)",
           "scope": "keyword.trap.ataribasic",
@@ -418,6 +426,34 @@
         {
           "match": "",
           "name": "invalid.illegal"
+        }
+      ]
+    },
+    "cmd_for": {
+      "comment": "Within FOR, look for TO AND STEP as a keywords",
+      "patterns": [
+        {
+          "include": "#mixin_statement_end"
+        },
+        {
+          "match": "TO",
+          "name": "keyword.to.ataribasic"
+        },
+        {
+          "match": "STEP",
+          "name": "keyword.step.ataribasic"
+        },
+        {
+          "include": "#expr_start"
+        }
+      ]
+    },
+    "cmd_next": {
+      "comment": "Within NEXT only a float var is valid",
+      "patterns": [
+        {
+          "match": "[A-Z][A-Z0-9]*",
+          "name": "variable.float.ataribasic"
         }
       ]
     },
