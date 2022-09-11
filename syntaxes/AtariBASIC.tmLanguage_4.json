@@ -754,10 +754,6 @@
       "comment": "An enclosed expression. Comma delimited. No items limit.",
       "patterns": [
         {
-          "match": "[^)]*(;:|$)",
-          "name": "invalid.illegal"
-        },
-        {
           "include": "#mixin_statement_end"
         },
         {
@@ -880,7 +876,7 @@
         {
           "begin": "\\(",
           "beginCaptures": {"0": {"name": "support.paren.open.ataribasic"}},
-          "end": "(\\))",
+          "end": "\\)|:|$",
           "endCaptures": {"0": {"name": "support.paren.close.ataribasic"}},
           "patterns": [{"include": "#expr_till_close"}]
         },
@@ -951,9 +947,9 @@
         {
           "begin": "\\(",
           "beginCaptures": {"0": {"name": "support.paren.open.expr.ataribasic"}},
-          "end": "\\)",
+          "end": "\\)|:|$",
           "endCaptures": {"0": {"name": "support.paren.close.expr.ataribasic"}},
-          "patterns": [{"include": "#expr_paren_open"}]
+          "patterns": [{"include": "#expr_wants_value"}]
         }
       ]
     },
@@ -992,7 +988,7 @@
         {
           "begin": "\\(",
           "beginCaptures": {"0": {"name": "support.paren.open.expr.ataribasic"}},
-          "end": "\\)",
+          "end": "\\)|:|$",
           "endCaptures": {"0": {"name": "support.paren.close.expr.ataribasic"}},
           "patterns": [{"include": "#expr_paren_open"}]
         },
@@ -1037,7 +1033,7 @@
         {
           "begin": "\\(",
           "beginCaptures": {"0": {"name": "support.paren.open.expr.ataribasic"}},
-          "end": "\\)",
+          "end": "\\)|:|$",
           "endCaptures": {"0": {"name": "support.paren.close.expr.ataribasic"}},
           "patterns": [{"include": "#expr_paren_open"}]
         },
