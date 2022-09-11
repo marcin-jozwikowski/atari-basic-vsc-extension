@@ -22,7 +22,7 @@
               "name": "invalid.warning.line-too-long.ataribasic"
             },
             "2": {
-              "name": "invalid.error.line-too-long.ataribasic"
+              "name": "invalid.illegal.line-too-long.ataribasic"
             }
           }
         },
@@ -32,24 +32,23 @@
         {
           "comment": "Existing whole line syntax error",
           "match": "([-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?))\\s*ERROR\\s*-.*",
-          "name": "invalid.error.line.ataribasic",
-          "push": "invalid.illegal"
+          "name": "invalid.illegal.line.ataribasic"
         },
         {
           "comment": "A code line starting with a number. Float and scientific notation allowed",
           "begin": "[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
           "beginCaptures": {
-            "1": {"name": "constant.numeric.line-number.ataribasic"}
+            "1": {"name": "keyword.control.line-number.ataribasic"}
           },
-          "end": "$",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic1"}},
+          "end": ":|$",
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic1"}},
           "patterns": [{"include": "#code_line"}]
         },
         {
           "comment": "A raw code line - without a leading number",
           "begin": "^",
-          "end": "$",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic2"}},
+          "end": ":|$",
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic2"}},
           "patterns": [{"include": "#code_line"}]
         }
       ]
@@ -61,7 +60,7 @@
           "comment": "REM comment till the end of the line",
           "begin": "(REM|(RE?)?\\.)",
           "end": "$",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic3"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic3"}},
           "name":"comment.line"
         },
         {
@@ -69,7 +68,7 @@
           "begin": "(D(ATA|(AT?)?\\.))\\s*",
           "beginCaptures": {"0": {"name": "keyword.data.ataribasic"}},
           "end": "$",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic4"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic4"}},
           "patterns": [{"include": "#cmd_data"}]
         },
         {
@@ -77,7 +76,7 @@
           "begin": "(RES(TORE|(T(O(RE?)?)?)?\\.))",
           "beginCaptures": {"0":{ "name": "keyword.restore.ataribasic"}},
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic5"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic5"}},
           "patterns": [{"include": "#expr_start"}]
         },
         {
@@ -113,7 +112,7 @@
           "begin": "(RU[N.])",
           "beginCaptures": {"0": {"name": "keyword.run.ataribasic"}},
           "end": "$",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic6"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic6"}},
           "patterns": [{"include": "#expr_start_last"}]
         },
         {
@@ -121,10 +120,10 @@
           "begin": "(\\?|PR(INT|(IN?)?.))[ ]*(#)",
           "beginCaptures": {
             "1": {"name": "keyword.print.ataribasic"},
-            "4": {"name": "support.token.iocb.ataribasic"}
+            "4": {"name": "support.other.iocb.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_print_dev"}]
         },
         {
@@ -132,7 +131,7 @@
           "begin": "\\?|PR(INT|(IN?)?\\.)",
           "beginCaptures": {"0": {"name": "keyword.print.ataribasic"}},
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_print"}]
         },
         {
@@ -140,17 +139,17 @@
           "begin": "LP(RINT|(R(IN?)?)?\\.)",
           "beginCaptures": {"0": {"name": "keyword.lprint.ataribasic"}},
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_print"}]
         },
         {
           "begin": "(I(NPUT|(N(PU?)?)?\\.))\\s*(#)",
           "beginCaptures": {
             "1": {"name": "keyword.input.ataribasic"},
-            "5": {"name": "support.token.iocb.ataribasic"}
+            "5": {"name": "support.other.iocb.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_device"}]
         },
         {
@@ -159,27 +158,27 @@
             "0": {"name": "keyword.input.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_start"}]
         },
         {
           "begin": "(CL(OSE|(OS?)?\\.))\\s*(#)",
           "beginCaptures": {
             "1": {"name": "keyword.close.ataribasic"},
-            "4": {"name": "support.token.iocb.ataribasic"}
+            "4": {"name": "support.other.iocb.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_device"}]
         },
         {
           "begin": "(O(PEN|(PE?)?\\.))\\s*(#)",
           "beginCaptures": {
             "1": {"name": "keyword.open.ataribasic"},
-            "4": {"name": "support.token.iocb.ataribasic"}
+            "4": {"name": "support.other.iocb.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_device"}]
         },
         {
@@ -188,10 +187,10 @@
             "2": {"name": "keyword.get.ataribasic"},
             "3": {"name": "keyword.note.ataribasic"},
             "5": {"name": "keyword.status.ataribasic"},
-            "9": {"name": "support.token.iocb.ataribasic"}
+            "9": {"name": "support.other.iocb.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_device"}]
         },
         {
@@ -200,27 +199,27 @@
             "1": {"name": "keyword.xio.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_xio"}]
         },
         {
           "begin": "(PUT)\\s*(#)",
           "beginCaptures": {
             "1": {"name": "keyword.get.ataribasic"},
-            "2": {"name": "support.token.iocb.ataribasic"}
+            "2": {"name": "support.other.iocb.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_device"}]
         },
         {
           "begin": "(P(OINT|(O(IN?)?)?\\.))\\s*(#)",
           "beginCaptures": {
             "1": {"name": "keyword.get.ataribasic"},
-            "5": {"name": "support.token.iocb.ataribasic"}
+            "5": {"name": "support.other.iocb.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_device"}]
         },
         {
@@ -229,7 +228,7 @@
             "0":{"name": "keyword.dim.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_dim_list"}]
         },
         {
@@ -238,7 +237,7 @@
             "0":{"name": "keyword.for.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_for"}]
         },
         {
@@ -247,7 +246,7 @@
             "0":{"name": "keyword.next.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_next"}]
         },
         {
@@ -256,7 +255,7 @@
             "0":{"name": "keyword.trap.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#one_expr"}]
         },
         {
@@ -265,7 +264,7 @@
             "0":{"name": "keyword.poke.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#two_exprs"}]
         },
         {
@@ -274,7 +273,7 @@
             "0":{"name": "keyword.color.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#one_expr"}]
         },
         {
@@ -283,7 +282,7 @@
             "0":{"name": "keyword.drawto.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#two_exprs"}]
         },
         {
@@ -292,7 +291,7 @@
             "0":{"name": "keyword.graphics.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#one_expr"}]
         },
         {
@@ -301,7 +300,7 @@
             "0":{"name": "keyword.locate.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#three_exprs"}]
         },
         {
@@ -310,7 +309,7 @@
             "0":{"name": "keyword.position.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#two_exprs"}]
         },
         {
@@ -319,7 +318,7 @@
             "0":{"name": "keyword.plot.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#two_exprs"}]
         },
         {
@@ -328,7 +327,7 @@
             "0":{"name": "keyword.setcolor.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#three_exprs"}]
         },
         {
@@ -337,7 +336,7 @@
             "0":{"name": "keyword.sound.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#four_exprs"}]
         },
         {
@@ -346,7 +345,7 @@
             "0":{"name": "keyword.read.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_start"}]
         },
         {
@@ -355,7 +354,7 @@
             "0":{"name": "keyword.list.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_start"}]
         },
         {
@@ -366,35 +365,35 @@
             "6": {"name": "keyword.enter.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#one_expr"}]
         }, 
         {
           "begin": "G(OTO|(OT?)?\\.)",
           "beginCaptures": {"0": {"name": "keyword.goto.ataribasic"}},
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_start_last"}]
         }, 
         {
           "begin": "GOS(UB|U?\\.)",
           "beginCaptures": {"0": {"name": "keyword.gosub.ataribasic"}},
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#one_expr"}]
         },
         {
           "begin": "ON",
           "beginCaptures": {"0": {"name": "keyword.on.ataribasic"}},
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_on"}]
         },
         {
           "begin": "IF",
           "beginCaptures": {"0": {"name": "keyword.if.ataribasic"}},
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_if"}]
         },        
         {
@@ -404,7 +403,7 @@
             "2": {"name": "variable.string.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_let"}]
         },
         {
@@ -414,7 +413,7 @@
             "2": {"name": "variable.float.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_let"}]
         },
         {
@@ -423,7 +422,7 @@
             "0": {"name": "variable.float.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_let"}]
         },
         {
@@ -432,7 +431,7 @@
             "0": {"name": "variable.float.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_let"}]
         }
       ]
@@ -446,7 +445,7 @@
         },
         {
           "match": "\\,",
-          "name": "support.token.delimiter.data.ataribasic6"
+          "name": "support.other.delimiter.data.ataribasic6"
         }
       ]
     },    
@@ -520,7 +519,7 @@
           "match": "\\s*(THEN)\\s*([-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?))",
           "captures": {
             "1": {"name": "keyword.then.ataribasic"},
-            "2": {"name": "constant.numeric.line-number.ataribasic"}
+            "2": {"name": "keyword.control.line-number.ataribasic"}
           },
           "patterns": [{"include": "#line_and_statement_should_end"}]
         },
@@ -530,7 +529,7 @@
             "1": {"name": "keyword.then.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.other.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#code_line"}]
         }
       ]
@@ -591,11 +590,11 @@
       "patterns": [
         {
           "match": ";",
-          "name": "support.token.delimiter.concat.ataribasic"
+          "name": "support.other.delimiter.concat.ataribasic"
         },
         {
           "match": "\\,",
-          "name": "support.token.delimiter.tab.ataribasic"
+          "name": "support.other.delimiter.tab.ataribasic"
         },
         {
           "include": "#real_expr"
@@ -620,7 +619,7 @@
       "patterns": [
         {
           "match": "\\,",
-          "scope": "support.token.delimiter.list.1.ataribasic"
+          "scope": "support.other.delimiter.list.1.ataribasic"
         },
         {
           "include": "#cmd_xio_part2"
@@ -639,7 +638,7 @@
         {
           "match": "\\s*(\\#)",
           "captures": {
-            "1": {"name": "support.token.iocb.ataribasic"}
+            "1": {"name": "support.other.iocb.ataribasic"}
           }
         },
         {
@@ -737,7 +736,7 @@
         },
         {
           "begin": ":",
-          "beginCaptures": {"0":{"name": "support.token.delimiter.statement.ataribasic"}},
+          "beginCaptures": {"0":{"name": "support.other.delimiter.statement.ataribasic"}},
           "end": "$",
           "name": "invalid.illegal"
         }
@@ -758,7 +757,7 @@
         },
         {
           "match": "\\,",
-          "scope": "support.token.delimiter.subscripts.ataribasic"
+          "scope": "support.other.delimiter.subscripts.ataribasic"
         },
         {
           "include": "#expr_eat_modifier"
@@ -787,7 +786,7 @@
           "match": "(THEN)\\s*[-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)",
           "captures": {
             "1": {"name": "keyword.then.ataribasic"},
-            "2": {"name": "constant.numeric.line-number.ataribasic"}
+            "2": {"name": "keyword.control.line-number.ataribasic"}
           },
           "include--": "#line_and_statement_should_end"
         },
@@ -814,7 +813,7 @@
       "patterns": [
         {
           "begin": "(CHR\\$)\\(",
-          "beginCaptures": {"0": {"name": "keyword.function-call.chrS.ataribasic"}},
+          "beginCaptures": {"0": {"name": "support.function.chrS.ataribasic"}},
           "end": "\\)|:|$",
           "patterns": [
             {"include": "#expr_wants_operator"},
@@ -823,7 +822,7 @@
         },
         {
           "begin": "(STR\\$)\\(",
-          "beginCaptures": {"0": {"name": "keyword.function-call.str.ataribasic"}},
+          "beginCaptures": {"0": {"name": "support.function.str.ataribasic"}},
           "end": "\\)|:|$",
           "patterns": [
             {"include": "#expr_wants_operator"},
@@ -833,28 +832,28 @@
         {
           "begin": "(FRE)|(USR)|(ABS)|(ADR)|(ASC)|(ATN)|(CLOG)|(COS)|(EXP)|(INT)|(LEN)|(LOG)|(PEEK)|(RND)|(SGN)|(SIN)|(SQR)|(VAL)|(PADDLE)|(PTRIG)|(STICK)|(STRIG)",
           "beginCaptures": {
-            "1": {"name": "keyword.function-call.fre.ataribasic"},
-            "2": {"name": "keyword.function-call.usr.ataribasic"},
-            "3": {"name": "keyword.function-call.abs.ataribasic"},
-            "4": {"name": "keyword.function-call.adr.ataribasic"},
-            "5": {"name": "keyword.function-call.asc.ataribasic"},
-            "6": {"name": "keyword.function-call.atn.ataribasic"},
-            "7": {"name": "keyword.function-call.clog.ataribasic"},
-            "8": {"name": "keyword.function-call.cos.ataribasic"},
-            "9": {"name": "keyword.function-call.exp.ataribasic"},
-            "10": {"name": "keyword.function-call.int.ataribasic"},
-            "11": {"name": "keyword.function-call.len.ataribasic"},
-            "12": {"name": "keyword.function-call.log.ataribasic"},
-            "13": {"name": "keyword.function-call.peek.ataribasic"},
-            "14": {"name": "keyword.function-call.rnd.ataribasic"},
-            "15": {"name": "keyword.function-call.sgn.ataribasic"},
-            "16": {"name": "keyword.function-call.sin.ataribasic"},
-            "17": {"name": "keyword.function-call.sqr.ataribasic"},
-            "18": {"name": "keyword.function-call.val.ataribasic"},
-            "19": {"name": "keyword.function-call.paddle.ataribasic"},
-            "20": {"name": "keyword.function-call.ptrig.ataribasic"},
-            "21": {"name": "keyword.function-call.stick.ataribasic"},
-            "22": {"name": "keyword.function-call.strig.ataribasic"}
+            "1": {"name": "support.function.fre.ataribasic"},
+            "2": {"name": "support.function.usr.ataribasic"},
+            "3": {"name": "support.function.abs.ataribasic"},
+            "4": {"name": "support.function.adr.ataribasic"},
+            "5": {"name": "support.function.asc.ataribasic"},
+            "6": {"name": "support.function.atn.ataribasic"},
+            "7": {"name": "support.function.clog.ataribasic"},
+            "8": {"name": "support.function.cos.ataribasic"},
+            "9": {"name": "support.function.exp.ataribasic"},
+            "10": {"name": "support.function.int.ataribasic"},
+            "11": {"name": "support.function.len.ataribasic"},
+            "12": {"name": "support.function.log.ataribasic"},
+            "13": {"name": "support.function.peek.ataribasic"},
+            "14": {"name": "support.function.rnd.ataribasic"},
+            "15": {"name": "support.function.sgn.ataribasic"},
+            "16": {"name": "support.function.sin.ataribasic"},
+            "17": {"name": "support.function.sqr.ataribasic"},
+            "18": {"name": "support.function.val.ataribasic"},
+            "19": {"name": "support.function.paddle.ataribasic"},
+            "20": {"name": "support.function.ptrig.ataribasic"},
+            "21": {"name": "support.function.stick.ataribasic"},
+            "22": {"name": "support.function.strig.ataribasic"}
           },
           "end": ":|$",
           "patterns": [
@@ -884,7 +883,7 @@
         },
         {
           "match": "THEN|GOTO|GOSUB",
-          "name": "invalid.error.reserved-word.ataribasic",
+          "name": "invalid.illegal.reserved-word.ataribasic",
           "patterns": [{"include": "#invalid.illegal"}]
         },
         {
@@ -908,7 +907,7 @@
         {
           "match": "\\s*(,)",
           "captures": {
-            "1": {"name":"support.token.delimiter.list.3.ataribasic"}
+            "1": {"name":"support.other.delimiter.list.3.ataribasic"}
           },
           "patterns": [{"include": "#three_exprs"}]
         },
@@ -923,7 +922,7 @@
         {
           "begin": ":",
           "end": "$",
-          "name": "support.token.delimiter.statement.ataribasic-2"
+          "name": "support.other.delimiter.statement.ataribasic-2"
         },
         {
           "match": "",
@@ -951,7 +950,7 @@
       "patterns": [
         {
           "match": "\\,",
-          "name": "support.token.delimiter.list.ataribasic"
+          "name": "support.other.delimiter.list.ataribasic"
         },
         {
           "match": "([-+*/^])",
@@ -1051,41 +1050,41 @@
         },
         {
           "begin": "CHR\\$",
-          "beginCaptures": {"0": {"name": "meta.function-call.chrS.ataribasic"}},
+          "beginCaptures": {"0": {"name": "support.function.chrS.ataribasic"}},
           "end": ":|$",
           "patterns": [{"include": "#required_args"}]
         },
         {
           "begin": "STR\\$",
-          "beginCaptures": {"0": {"name": "meta.function-call.str.ataribasic"}},
+          "beginCaptures": {"0": {"name": "support.function.str.ataribasic"}},
           "end": ":|$",
           "patterns": [{"include": "#required_args"}]
         },
         {
           "begin": "(FRE)|(USR)|(ABS)|(ADR)|(ASC)|(ATN)|(CLOG)|(COS)|(EXP)|(INT)|(LEN)|(LOG)|(PEEK)|(RND)|(SGN)|(SIN)|(SQR)|(VAL)|(PADDLE)|(PTRIG)|(STICK)|(STRIG)",
           "beginCaptures": {
-            "2": {"name":"meta.function-call.usr.ataribasic"},
-            "3": {"name":"meta.function-call.abs.ataribasic"},
-            "1": {"name":"meta.function-call.fre.ataribasic"},
-            "4": {"name":"meta.function-call.adr.ataribasic"},
-            "5": {"name":"meta.function-call.asc.ataribasic"},
-            "6": {"name":"meta.function-call.atn.ataribasic"},
-            "7": {"name":"meta.function-call.clog.ataribasic"},
-            "8": {"name":"meta.function-call.cos.ataribasic"},
-            "9": {"name":"meta.function-call.exp.ataribasic"},
-            "10":{"name": "meta.function-call.int.ataribasic"},
-            "11":{"name": "meta.function-call.len.ataribasic"},
-            "12":{"name": "meta.function-call.log.ataribasic"},
-            "13":{"name": "meta.function-call.peek.ataribasic"},
-            "14":{"name": "meta.function-call.rnd.ataribasic"},
-            "15":{"name": "meta.function-call.sgn.ataribasic"},
-            "16":{"name": "meta.function-call.sin.ataribasic"},
-            "17":{"name": "meta.function-call.sqr.ataribasic"},
-            "18":{"name": "meta.function-call.val.ataribasic"},
-            "19":{"name": "meta.function-call.paddle.ataribasic"},
-            "20":{"name": "meta.function-call.ptrig.ataribasic"},
-            "21":{"name": "meta.function-call.stick.ataribasic"},
-            "22":{"name": "meta.function-call.strig.ataribasic"}
+            "2": {"name":"support.function.usr.ataribasic"},
+            "3": {"name":"support.function.abs.ataribasic"},
+            "1": {"name":"support.function.fre.ataribasic"},
+            "4": {"name":"support.function.adr.ataribasic"},
+            "5": {"name":"support.function.asc.ataribasic"},
+            "6": {"name":"support.function.atn.ataribasic"},
+            "7": {"name":"support.function.clog.ataribasic"},
+            "8": {"name":"support.function.cos.ataribasic"},
+            "9": {"name":"support.function.exp.ataribasic"},
+            "10":{"name": "support.function.int.ataribasic"},
+            "11":{"name": "support.function.len.ataribasic"},
+            "12":{"name": "support.function.log.ataribasic"},
+            "13":{"name": "support.function.peek.ataribasic"},
+            "14":{"name": "support.function.rnd.ataribasic"},
+            "15":{"name": "support.function.sgn.ataribasic"},
+            "16":{"name": "support.function.sin.ataribasic"},
+            "17":{"name": "support.function.sqr.ataribasic"},
+            "18":{"name": "support.function.val.ataribasic"},
+            "19":{"name": "support.function.paddle.ataribasic"},
+            "20":{"name": "support.function.ptrig.ataribasic"},
+            "21":{"name": "support.function.stick.ataribasic"},
+            "22":{"name": "support.function.strig.ataribasic"}
           },
           "end": "$",
           "patterns": [{"include": "#required_args"}]
@@ -1122,8 +1121,8 @@
         {
           "match": "([-+]?(\\d+\\.\\d*(E\\d+)?|\\.?\\d+(E\\d+)?)|[A-Z][A-Z0-9]*)\\s*(\\,)?",
           "captures": {
-            "1": {"name": "constant.numeric.line-number.ataribasic"},
-            "2": {"name": "support.token.delimiter.list.ataribasic"}
+            "1": {"name": "keyword.control.line-number.ataribasic"},
+            "2": {"name": "support.other.delimiter.list.ataribasic"}
           }
         },
         {
@@ -1142,7 +1141,7 @@
         {
           "match": "\\s*(,)",
           "captures": {
-            "1": {"name": "support.token.delimiter.list.1.ataribasic"}
+            "1": {"name": "support.other.delimiter.list.1.ataribasic"}
           },
           "patterns": [{"include": "#one_expr"}]
         },
@@ -1156,7 +1155,7 @@
         {
           "match": "\\s*(,)",
           "captures": {
-            "1": {"name":"support.token.delimiter.list.2.ataribasic"}
+            "1": {"name":"support.other.delimiter.list.2.ataribasic"}
           },
           "patterns": [{"include": "#two_exprs"}]
         },
