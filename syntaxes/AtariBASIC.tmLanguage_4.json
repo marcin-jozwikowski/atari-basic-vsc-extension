@@ -294,70 +294,99 @@
           "end": "(:|$)",
           "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#one_expr"}]
+        },
+        {
+          "begin": "LOC(ATE|(AT?)?\\.)",
+          "beginCaptures": {
+            "0":{"name": "keyword.locate.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#three_exprs"}]
+        },
+        {
+          "begin": "POS(ITION|(I(T(IO?)?)?)?\\.)",
+          "beginCaptures": {
+            "0":{"name": "keyword.position.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#two_exprs"}]
+        },
+        {
+          "begin": "PL(OT|O?\\.)",
+          "beginCaptures": {
+            "0":{"name": "keyword.plot.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#two_exprs"}]
+        },
+        {
+          "begin": "SE(TCOLOR|(T(C(O(LO?)?)?)?)?\\.)",
+          "beginCaptures": {
+            "0":{"name": "keyword.setcolor.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#three_exprs"}]
+        },
+        {
+          "begin": "SO(UND|(UN?)?\\.)",
+          "beginCaptures": {
+            "0":{"name": "keyword.sound.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#four_exprs"}]
+        },
+        {
+          "begin": "REA[D.]",
+          "beginCaptures": {
+            "0":{"name": "keyword.read.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#expr_start"}]
+        },
+        {
+          "begin": "L(IST|(IS?)?\\.)",
+          "beginCaptures": {
+            "0":{"name": "keyword.list.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#expr_start"}]
+        },
+        {
+          "begin": "(LO(AD|A?\\.))|(S(AVE|(AV?)?\\.))|(E(NTER|(N(TE?)?)?\\.))",
+          "beginCaptures": {
+            "1": {"name": "keyword.load.ataribasic"},
+            "3": {"name": "keyword.save.ataribasic"},
+            "6": {"name": "keyword.enter.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#one_expr"}]
+        }, 
+        {
+          "begin": "G(OTO|(OT?)?\\.)",
+          "beginCaptures": {"0": {"name": "keyword.goto.ataribasic"}},
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#expr_start_last"}]
+        }, 
+        {
+          "begin": "GOS(UB|U?\\.)",
+          "beginCaptures": {"0": {"name": "keyword.gosub.ataribasic"}},
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#one_expr"}]
         }
       ]
     },
     "code_line_todo_and_not_done": {
       "patterns": [
-        {
-          "match": "LOC(ATE|(AT?)?\\.)",
-          "scope": "keyword.locate.ataribasic",
-          "push": "three_exprs"
-        },
-        {
-          "match": "POS(ITION|(I(T(IO?)?)?)?\\.)",
-          "scope": "keyword.position.ataribasic",
-          "push": "two_exprs"
-        },
-        {
-          "match": "PL(OT|O?\\.)",
-          "scope": "keyword.plot.ataribasic",
-          "push": "two_exprs"
-        },
-        {
-          "match": "SE(TCOLOR|(T(C(O(LO?)?)?)?)?\\.)",
-          "scope": "keyword.setcolor.ataribasic",
-          "push": "three_exprs"
-        },
-        {
-          "match": "SO(UND|(UN?)?\\.)",
-          "scope": "keyword.sound.ataribasic",
-          "push": "four_exprs"
-        },
-        {
-          "match": "REA[D.]",
-          "scope": "keyword.read.ataribasic",
-          "push": "expr_start"
-        },
-        {
-          "match": "THREE",
-          "scope": "keyword.three.ataribasic",
-          "push": "three_exprs"
-        },
-        {
-          "match": "L(IST|(IS?)?\\.)",
-          "scope": "keyword.list.ataribasic",
-          "push": "expr_start"
-        },
-        {
-          "match": "(LO(AD|A?\\.))|(S(AVE|(AV?)?\\.))|(E(NTER|(N(TE?)?)?\\.))",
-          "captures": {
-            "1": "keyword.load.ataribasic",
-            "3": "keyword.save.ataribasic",
-            "6": "keyword.enter.ataribasic"
-          },
-          "push": "one_expr"
-        },
-        {
-          "match": "G(OTO|(OT?)?\\.)",
-          "scope": "keyword.goto.ataribasic",
-          "push": "expr_start_last"
-        },
-        {
-          "match": "GOS(UB|U?\\.)",
-          "scope": "keyword.gosub.ataribasic",
-          "push": "one_expr"
-        },
         {
           "match": "ON",
           "scope": "keyword.on.ataribasic",
@@ -793,6 +822,20 @@
         }
       ]
     },
+    "four_exprs": {
+      "patterns": [
+        {
+          "match": "\\s*(,)",
+          "captures": {
+            "1": {"name":"support.token.delimiter.list.3.ataribasic"}
+          },
+          "patterns": [{"include": "#three_exprs"}]
+        },
+        {
+          "include": "#real_expr"
+        }
+      ]
+    },
     "line_and_statement_should_end" :{
       "comment": "A statement might also want to end the line",
       "patterns": [
@@ -971,6 +1014,20 @@
             "1": {"name": "support.token.delimiter.list.1.ataribasic"}
           },
           "patterns": [{"include": "#one_expr"}]
+        },
+        {
+          "include": "#real_expr"
+        }
+      ]
+    },
+    "three_exprs": {
+      "patterns": [
+        {
+          "match": "\\s*(,)",
+          "captures": {
+            "1": {"name":"support.token.delimiter.list.2.ataribasic"}
+          },
+          "patterns": [{"include": "#two_exprs"}]
         },
         {
           "include": "#real_expr"
