@@ -193,6 +193,15 @@
           "end": "(:|$)",
           "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_device"}]
+        },
+        {
+          "begin": "(XIO)\\s*",
+          "beginCaptures": {
+            "1": {"name": "keyword.xio.ataribasic"}
+          },
+          "end": "(:|$)",
+          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#cmd_xio"}]
         }
       ]
     },
@@ -403,6 +412,37 @@
         },
         {
           "include": "#cmd_print"
+        }
+      ]
+    },
+    "cmd_xio": {
+      "patterns": [
+        {
+          "match": "\\,",
+          "scope": "support.token.delimiter.list.1.ataribasic"
+        },
+        {
+          "include": "#cmd_xio_part2"
+        },
+        {
+          "include": "real_expr"
+        },
+        {
+          "match": "",
+          "set": "syntax_error"
+        }
+      ]
+    },
+    "cmd_xio_part2": {
+      "patterns": [
+        {
+          "match": "\\s*(\\#)",
+          "captures": {
+            "1": {"name": "support.token.iocb.ataribasic"}
+          }
+        },
+        {
+          "include": "#expr_device"
         }
       ]
     },
