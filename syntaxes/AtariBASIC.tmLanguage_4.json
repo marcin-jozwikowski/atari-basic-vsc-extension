@@ -42,14 +42,14 @@
             "1": {"name": "constant.numeric.line-number.ataribasic"}
           },
           "end": "$",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic1"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic1"}},
           "patterns": [{"include": "#code_line"}]
         },
         {
           "comment": "A raw code line - without a leading number",
           "begin": "^",
           "end": "$",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic2"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic2"}},
           "patterns": [{"include": "#code_line"}]
         }
       ]
@@ -61,23 +61,23 @@
           "comment": "REM comment till the end of the line",
           "begin": "(REM|(RE?)?\\.)",
           "end": "$",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic3"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic3"}},
           "name":"comment.line"
         },
         {
           "comment": "DATA makes the rest of the line a delimited list of strings",
           "begin": "(D(ATA|(AT?)?\\.))\\s*",
-          "beginCaptures": {"1": {"name": "keyword.data.ataribasic"}},
+          "beginCaptures": {"0": {"name": "keyword.data.ataribasic"}},
           "end": "$",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic4"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic4"}},
           "patterns": [{"include": "#cmd_data"}]
         },
         {
           "comment": "RESTORE [<nexpr>]",
           "begin": "(RES(TORE|(T(O(RE?)?)?)?\\.))",
-          "beginCaptures": {"1":{ "name": "keyword.restore.ataribasic"}},
+          "beginCaptures": {"0":{ "name": "keyword.restore.ataribasic"}},
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic5"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic5"}},
           "patterns": [{"include": "#expr_start"}]
         },
         {
@@ -111,9 +111,9 @@
         {
           "comment": "RUN [<string>]",
           "begin": "(RU[N.])",
-          "beginCaptures": {"1": {"name": "keyword.run.ataribasic"}},
+          "beginCaptures": {"0": {"name": "keyword.run.ataribasic"}},
           "end": "$",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic6"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic6"}},
           "patterns": [{"include": "#expr_start_last"}]
         },
         {
@@ -124,7 +124,7 @@
             "4": {"name": "support.token.iocb.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_print_dev"}]
         },
         {
@@ -132,7 +132,7 @@
           "begin": "\\?|PR(INT|(IN?)?\\.)",
           "beginCaptures": {"0": {"name": "keyword.print.ataribasic"}},
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_print"}]
         },
         {
@@ -140,7 +140,7 @@
           "begin": "LP(RINT|(R(IN?)?)?\\.)",
           "beginCaptures": {"0": {"name": "keyword.lprint.ataribasic"}},
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_print"}]
         },
         {
@@ -150,7 +150,7 @@
             "5": {"name": "support.token.iocb.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_device"}]
         },
         {
@@ -159,7 +159,7 @@
             "0": {"name": "keyword.input.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_start"}]
         },
         {
@@ -169,7 +169,7 @@
             "4": {"name": "support.token.iocb.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_device"}]
         },
         {
@@ -179,7 +179,7 @@
             "4": {"name": "support.token.iocb.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_device"}]
         },
         {
@@ -191,7 +191,7 @@
             "9": {"name": "support.token.iocb.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_device"}]
         },
         {
@@ -200,7 +200,7 @@
             "1": {"name": "keyword.xio.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_xio"}]
         },
         {
@@ -210,7 +210,7 @@
             "2": {"name": "support.token.iocb.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_device"}]
         },
         {
@@ -220,7 +220,7 @@
             "5": {"name": "support.token.iocb.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_device"}]
         },
         {
@@ -229,7 +229,7 @@
             "0":{"name": "keyword.dim.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_dim_list"}]
         },
         {
@@ -238,7 +238,7 @@
             "0":{"name": "keyword.for.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_for"}]
         },
         {
@@ -247,7 +247,7 @@
             "0":{"name": "keyword.next.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_next"}]
         },
         {
@@ -256,7 +256,7 @@
             "0":{"name": "keyword.trap.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#one_expr"}]
         },
         {
@@ -265,7 +265,7 @@
             "0":{"name": "keyword.poke.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#two_exprs"}]
         },
         {
@@ -274,7 +274,7 @@
             "0":{"name": "keyword.color.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#one_expr"}]
         },
         {
@@ -283,7 +283,7 @@
             "0":{"name": "keyword.drawto.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#two_exprs"}]
         },
         {
@@ -292,7 +292,7 @@
             "0":{"name": "keyword.graphics.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#one_expr"}]
         },
         {
@@ -301,7 +301,7 @@
             "0":{"name": "keyword.locate.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#three_exprs"}]
         },
         {
@@ -310,7 +310,7 @@
             "0":{"name": "keyword.position.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#two_exprs"}]
         },
         {
@@ -319,7 +319,7 @@
             "0":{"name": "keyword.plot.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#two_exprs"}]
         },
         {
@@ -328,7 +328,7 @@
             "0":{"name": "keyword.setcolor.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#three_exprs"}]
         },
         {
@@ -337,7 +337,7 @@
             "0":{"name": "keyword.sound.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#four_exprs"}]
         },
         {
@@ -346,7 +346,7 @@
             "0":{"name": "keyword.read.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_start"}]
         },
         {
@@ -355,7 +355,7 @@
             "0":{"name": "keyword.list.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_start"}]
         },
         {
@@ -366,35 +366,35 @@
             "6": {"name": "keyword.enter.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#one_expr"}]
         }, 
         {
           "begin": "G(OTO|(OT?)?\\.)",
           "beginCaptures": {"0": {"name": "keyword.goto.ataribasic"}},
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#expr_start_last"}]
         }, 
         {
           "begin": "GOS(UB|U?\\.)",
           "beginCaptures": {"0": {"name": "keyword.gosub.ataribasic"}},
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#one_expr"}]
         },
         {
           "begin": "ON",
           "beginCaptures": {"0": {"name": "keyword.on.ataribasic"}},
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_on"}]
         },
         {
           "begin": "IF",
           "beginCaptures": {"0": {"name": "keyword.if.ataribasic"}},
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_if"}]
         },        
         {
@@ -404,7 +404,7 @@
             "2": {"name": "variable.string.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_let"}]
         },
         {
@@ -414,28 +414,26 @@
             "2": {"name": "variable.float.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#cmd_let"}]
         },
         {
-          "begin": "([A-Z][A-Z0-9]*)\\s?(=)\\s?",
+          "begin": "([A-Z][A-Z0-9]*\\$)",
           "beginCaptures": {
-            "1": {"name": "variable.float.ataribasic"},
-            "2": {"name": "keyword.operator.assignment.ataribasic"}
+            "0": {"name": "variable.float.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
-          "patterns": [{"include": "#expr_wants_value"}]
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#cmd_let"}]
         },
         {
-          "begin": "([A-Z][A-Z0-9]*\\$)\\s?(=)\\s?",
+          "begin": "([A-Z][A-Z0-9]*)",
           "beginCaptures": {
-            "1": {"name": "variable.float.ataribasic"},
-            "2": {"name": "keyword.operator.assignment.ataribasic"}
+            "0": {"name": "variable.float.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
-          "patterns": [{"include": "#expr_wants_value"}]
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
+          "patterns": [{"include": "#cmd_let"}]
         }
       ]
     },
@@ -478,9 +476,9 @@
       "patterns": [
         {
           "begin": "\\(",
-          "beginCaptures": {"1": {"name": "support.paren.open.expr.ataribasic"}},
+          "beginCaptures": {"0": {"name": "support.paren.open.expr.ataribasic"}},
           "end": "\\)",
-          "endCaptures": {"1": {"name": "support.paren.close.expr.ataribasic"}},
+          "endCaptures": {"0": {"name": "support.paren.close.expr.ataribasic"}},
           "patterns": [{"include": "#expr_paren_open"}]
         }
       ]
@@ -532,7 +530,7 @@
             "1": {"name": "keyword.then.ataribasic"}
           },
           "end": "(:|$)",
-          "endCaptures": {"1": {"name":"support.token.delimiter.data.ataribasic"}},
+          "endCaptures": {"0": {"name":"support.token.delimiter.data.ataribasic"}},
           "patterns": [{"include": "#code_line"}]
         }
       ]
@@ -541,9 +539,9 @@
       "patterns": [
         {
           "begin": "\\(",
-          "beginCaptures": {"1": {"name": "support.paren.open.expr.ataribasic"}},
+          "beginCaptures": {"0": {"name": "support.paren.open.expr.ataribasic"}},
           "end": "\\)",
-          "endCaptures": {"1": {"name": "support.paren.close.expr.ataribasic"}},
+          "endCaptures": {"0": {"name": "support.paren.close.expr.ataribasic"}},
           "patterns": [{"include": "#expr_paren_open"}]
         },
         {"include": "#cmd_let_equals"}
@@ -739,7 +737,7 @@
         },
         {
           "begin": ":",
-          "beginCaptures": {"1":{"name": "support.token.delimiter.statement.ataribasic"}},
+          "beginCaptures": {"0":{"name": "support.token.delimiter.statement.ataribasic"}},
           "end": "$",
           "name": "invalid.illegal"
         }
@@ -816,7 +814,7 @@
       "patterns": [
         {
           "begin": "(CHR\\$)\\(",
-          "beginCaptures": {"1": {"name": "meta.function-call.chrS.ataribasic"}},
+          "beginCaptures": {"0": {"name": "keyword.function-call.chrS.ataribasic"}},
           "end": "\\)|:|$",
           "patterns": [
             {"include": "#expr_wants_operator"},
@@ -825,7 +823,7 @@
         },
         {
           "begin": "(STR\\$)\\(",
-          "beginCaptures": {"1": {"name": "meta.function-call.str.ataribasic"}},
+          "beginCaptures": {"0": {"name": "keyword.function-call.str.ataribasic"}},
           "end": "\\)|:|$",
           "patterns": [
             {"include": "#expr_wants_operator"},
@@ -835,28 +833,28 @@
         {
           "begin": "(FRE)|(USR)|(ABS)|(ADR)|(ASC)|(ATN)|(CLOG)|(COS)|(EXP)|(INT)|(LEN)|(LOG)|(PEEK)|(RND)|(SGN)|(SIN)|(SQR)|(VAL)|(PADDLE)|(PTRIG)|(STICK)|(STRIG)",
           "beginCaptures": {
-            "1": {"name": "meta.function-call.fre.ataribasic"},
-            "2": {"name": "meta.function-call.usr.ataribasic"},
-            "3": {"name": "meta.function-call.abs.ataribasic"},
-            "4": {"name": "meta.function-call.adr.ataribasic"},
-            "5": {"name": "meta.function-call.asc.ataribasic"},
-            "6": {"name": "meta.function-call.atn.ataribasic"},
-            "7": {"name": "meta.function-call.clog.ataribasic"},
-            "8": {"name": "meta.function-call.cos.ataribasic"},
-            "9": {"name": "meta.function-call.exp.ataribasic"},
-            "10": {"name": "meta.function-call.int.ataribasic"},
-            "11": {"name": "meta.function-call.len.ataribasic"},
-            "12": {"name": "meta.function-call.log.ataribasic"},
-            "13": {"name": "meta.function-call.peek.ataribasic"},
-            "14": {"name": "meta.function-call.rnd.ataribasic"},
-            "15": {"name": "meta.function-call.sgn.ataribasic"},
-            "16": {"name": "meta.function-call.sin.ataribasic"},
-            "17": {"name": "meta.function-call.sqr.ataribasic"},
-            "18": {"name": "meta.function-call.val.ataribasic"},
-            "19": {"name": "meta.function-call.paddle.ataribasic"},
-            "20": {"name": "meta.function-call.ptrig.ataribasic"},
-            "21": {"name": "meta.function-call.stick.ataribasic"},
-            "22": {"name": "meta.function-call.strig.ataribasic"}
+            "1": {"name": "keyword.function-call.fre.ataribasic"},
+            "2": {"name": "keyword.function-call.usr.ataribasic"},
+            "3": {"name": "keyword.function-call.abs.ataribasic"},
+            "4": {"name": "keyword.function-call.adr.ataribasic"},
+            "5": {"name": "keyword.function-call.asc.ataribasic"},
+            "6": {"name": "keyword.function-call.atn.ataribasic"},
+            "7": {"name": "keyword.function-call.clog.ataribasic"},
+            "8": {"name": "keyword.function-call.cos.ataribasic"},
+            "9": {"name": "keyword.function-call.exp.ataribasic"},
+            "10": {"name": "keyword.function-call.int.ataribasic"},
+            "11": {"name": "keyword.function-call.len.ataribasic"},
+            "12": {"name": "keyword.function-call.log.ataribasic"},
+            "13": {"name": "keyword.function-call.peek.ataribasic"},
+            "14": {"name": "keyword.function-call.rnd.ataribasic"},
+            "15": {"name": "keyword.function-call.sgn.ataribasic"},
+            "16": {"name": "keyword.function-call.sin.ataribasic"},
+            "17": {"name": "keyword.function-call.sqr.ataribasic"},
+            "18": {"name": "keyword.function-call.val.ataribasic"},
+            "19": {"name": "keyword.function-call.paddle.ataribasic"},
+            "20": {"name": "keyword.function-call.ptrig.ataribasic"},
+            "21": {"name": "keyword.function-call.stick.ataribasic"},
+            "22": {"name": "keyword.function-call.strig.ataribasic"}
           },
           "end": ":|$",
           "patterns": [
@@ -866,16 +864,17 @@
         },
         {
           "begin": "\\\"",
-          "beginCaptures": {"1":{"name": "punctuation.definition.string.open.ataribasic"}},
+          "beginCaptures": {"0":{"name": "punctuation.definition.string.open.ataribasic"}},
           "end": "\\\"",
-          "endCaptures": {"1":{"name": "punctuation.definition.string.open.ataribasic"}},
+          "endCaptures": {"0":{"name": "punctuation.definition.string.open.ataribasic"}},
           "patterns": [{"include": "#quoted_string"}],
           "name": "string.quoted.double"
         },
         {
           "begin": "\\(",
-          "end": "(\\)|:|$)",
-          "beginCaptures": {"1": {"name": "support.paren.open.ataribasic"}},
+          "beginCaptures": {"0": {"name": "support.paren.open.ataribasic"}},
+          "end": "(\\))",
+          "endCaptures": {"0": {"name": "support.paren.close.ataribasic"}},
           "patterns": [{"include": "#expr_till_close"}]
         },
         {
@@ -940,9 +939,9 @@
         },
         {
           "begin": "\\(",
-          "beginCaptures": {"1": {"name": "support.paren.open.expr.ataribasic"}},
+          "beginCaptures": {"0": {"name": "support.paren.open.expr.ataribasic"}},
           "end": "\\)",
-          "endCaptures": {"1": {"name": "support.paren.close.expr.ataribasic"}},
+          "endCaptures": {"0": {"name": "support.paren.close.expr.ataribasic"}},
           "patterns": [{"include": "#expr_paren_open"}]
         }
       ]
@@ -981,9 +980,9 @@
         },
         {
           "begin": "\\(",
-          "beginCaptures": {"1": {"name": "support.paren.open.expr.ataribasic"}},
+          "beginCaptures": {"0": {"name": "support.paren.open.expr.ataribasic"}},
           "end": "\\)",
-          "endCaptures": {"1": {"name": "support.paren.close.expr.ataribasic"}},
+          "endCaptures": {"0": {"name": "support.paren.close.expr.ataribasic"}},
           "patterns": [{"include": "#expr_paren_open"}]
         },
         {
@@ -1010,9 +1009,9 @@
       "patterns": [
         {
           "begin": "\\\"",
-          "beginCaptures": {"1":{"name": "punctuation.definition.string.open.ataribasic"}},
+          "beginCaptures": {"0":{"name": "punctuation.definition.string.open.ataribasic"}},
           "end": "\\\"",
-          "endCaptures": {"1":{"name": "punctuation.definition.string.open.ataribasic"}},
+          "endCaptures": {"0":{"name": "punctuation.definition.string.open.ataribasic"}},
           "patterns": [{"include": "#quoted_string"}],
           "name": "string.quoted.double"
         }
@@ -1026,9 +1025,9 @@
         },
         {
           "begin": "\\(",
-          "beginCaptures": {"1": {"name": "support.paren.open.expr.ataribasic"}},
+          "beginCaptures": {"0": {"name": "support.paren.open.expr.ataribasic"}},
           "end": "\\)",
-          "endCaptures": {"1": {"name": "support.paren.close.expr.ataribasic"}},
+          "endCaptures": {"0": {"name": "support.paren.close.expr.ataribasic"}},
           "patterns": [{"include": "#expr_paren_open"}]
         },
         {
@@ -1052,13 +1051,13 @@
         },
         {
           "begin": "CHR\\$",
-          "beginCaptures": {"1": {"name": "meta.function-call.chrS.ataribasic"}},
+          "beginCaptures": {"0": {"name": "meta.function-call.chrS.ataribasic"}},
           "end": ":|$",
           "patterns": [{"include": "#required_args"}]
         },
         {
           "begin": "STR\\$",
-          "beginCaptures": {"1": {"name": "meta.function-call.str.ataribasic"}},
+          "beginCaptures": {"0": {"name": "meta.function-call.str.ataribasic"}},
           "end": ":|$",
           "patterns": [{"include": "#required_args"}]
         },
@@ -1088,7 +1087,7 @@
             "21":{"name": "meta.function-call.stick.ataribasic"},
             "22":{"name": "meta.function-call.strig.ataribasic"}
           },
-          "end": "\\:|$",
+          "end": "$",
           "patterns": [{"include": "#required_args"}]
         },
         {
@@ -1105,12 +1104,12 @@
       "patterns": [
         {
           "match": "[A-Z][A-Z0-9]*\\$",
-          "captures": {"1" : {"name": "variable.string.ataribasic"}},
+          "captures": {"0" : {"name": "variable.string.ataribasic"}},
           "patterns": [{"include": "#var_eat_subscript"}]
         },
         {
           "match": "[A-Z][A-Z0-9]*",
-          "captures": {"1" : {"name": "variable.float.ataribasic"}},
+          "captures": {"0" : {"name": "variable.float.ataribasic"}},
           "patterns": [{"include": "#var_eat_subscript"}]
         }
       ]
@@ -1182,10 +1181,9 @@
       "patterns": [
         {
           "begin": "\\(",
-          "beginCaptures": {"1": {"name": "support.paren.open.func.ataribasic"}},
-          "end": "\\)|:|$",
-          "endCaptures": {"1": {"name": "support.paren.close.func.ataribasic"}},
-          "name": "required_args-2",
+          "beginCaptures": {"0": {"name": "support.paren.open.func.ataribasic"}},
+          "end": "\\)",
+          "endCaptures": {"0": {"name": "support.paren.close.func.ataribasic"}},
           "patterns": [{"include": "#expr_paren_open"}]
         },
         {
@@ -1207,9 +1205,9 @@
       "patterns": [
         {
           "begin": "\\(",
-          "beginCaptures": {"1": {"name": "support.paren.open.subscript.ataribasic"}},
+          "beginCaptures": {"0": {"name": "support.paren.open.subscript.ataribasic"}},
           "end": "\\)",
-          "endCaptures": {"1": {"name": "support.paren.close.subscript.ataribasic"}},
+          "endCaptures": {"0": {"name": "support.paren.close.subscript.ataribasic"}},
           "patterns": [{"include": "#expr_paren_open"}]
         }
       ]
